@@ -1,0 +1,34 @@
+<p-card [style]="{ width: '17rem' }" (click)="detail(post.uuid)">
+  <ng-template pTemplate="header">
+    <img alt="Card" class="w-full" [style]="{ width: '100%', height:'250px' }"
+      [src]="post.images_url ? getImagePath(): 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'" />
+  </ng-template>
+  <ng-template pTemplate="title">
+    <p-tag [severity]="post.type|postTypeTag" [value]="post.type|postTypeEnum" [rounded]="true" />
+    <br>
+    <h4 class="nunito-bold">{{post.title|truncate:20|uppercase}}</h4>
+  </ng-template>
+  <ng-template pTemplate="subtitle">
+    <p class="lato-regular">{{post.city}}, {{post.locality}}</p>
+  </ng-template>
+  <p class="inter-regular">{{post.description|truncate:30}}</p>
+  <ng-template pTemplate="footer">
+    <div class="d-flex align-items-center my-3">
+      @if (userPost) {
+        @if (userPost.image_url) {
+          <p-avatar 
+            [image]="userPost.image_url ?? 'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png'"
+            class="me-2"
+            size="large"
+            shape="circle"
+          />
+        }
+        @else {
+          <p-avatar styleClass="me-2" [style]="{ 'background-color': '#307475', color: '#e8eded' }" shape="circle" icon="pi pi-user" />
+        }
+        <p class="mb-0 lato-medium">{{ userPost.first_name + " " + userPost.last_name }}</p>
+      }
+    </div>
+    <p class="inter-light">{{post.created_at|timeAgo}}</p>
+  </ng-template>
+</p-card>

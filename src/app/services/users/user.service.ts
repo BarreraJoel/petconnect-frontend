@@ -14,7 +14,7 @@ export class UserService {
     return firstValueFrom(this.apiService.get(`${environment.backend.apiV1Host}/users`));
   }
 
-  public async get(id: number) {
-    return firstValueFrom(this.apiService.get(`${environment.backend.apiV1Host}/users/${id}}`));
+  public async get(uuid: string) {
+    return firstValueFrom(this.apiService.get(`${environment.backend.apiV1Host}/users/${uuid}`));
   }
 }

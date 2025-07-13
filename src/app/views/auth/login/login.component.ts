@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  protected email: string = "juan@mail.com";
+  protected email: string = "";
   protected password: string = "12345678";
 
   constructor(private authService: AuthService, private router: Router) { }

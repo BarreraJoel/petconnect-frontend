@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark shadow-sm px-4 py-2">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    
+    <div class="navbar-start d-flex align-items-center">
+      <img src="assets/img/logo2.png" alt="Logo" width="50" height="50" class="me-2">
+    </div>
+
+    <div class="navbar-items d-none d-lg-flex gap-4">
+        @for (item of items; track $index) {
+            <p-button pRipple [label]="item.label" variant="text" [icon]="item.icon ?? ''" severity="contrast"  (click)="redirect(item.route)" />
+        }
+    </div>
+
+    <div class="navbar-end d-flex align-items-center gap-3">
+        <p-button pRipple label="Mi cuenta" variant="text" icon="pi pi-user" severity="contrast" (click)="redirect('posts')" />
+        <p-iconfield>
+            <p-inputicon styleClass="pi pi-search" />
+            <input type="text" pInputText placeholder="Search" />
+        </p-iconfield>
+    </div>
+  </div>
+</nav>

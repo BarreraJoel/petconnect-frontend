@@ -1,0 +1,43 @@
+<div class="login-container">
+    <h3 class="text-center mb-4">CREAR PUBLICACÓN</h3>
+    <form [formGroup]="frm" (ngSubmit)="publish()" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="title" class="form-label">Titulo</label>
+            <input class="form-control" type="text" placeholder="Ingrese un título" formControlName="title" name="title" />
+        </div>
+
+        <div class="mb-3">
+            <label for="firstName" class="form-label">Ciudad</label>
+            <input class="form-control" type="text" placeholder="Ingrese la ciudad" formControlName="city" name="city" />
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Localidad</label>
+            <input class="form-control" type="text" placeholder="Ingrese la localidad" formControlName="locality" name="locality" />
+        </div>
+
+        <div class="mb-3">
+            <label for="type" class="form-label">Tipo</label>
+            <select class="form-control" name="type" formControlName="type" id="">
+                @for (enum of typeEnum; track $index) {
+                    <option [value]="enum">{{enum}}</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="text" class="form-label">Descripción</label>
+            <textarea class="form-control" placeholder="Ingrese una descripción" formControlName="description" name="description"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="text" class="form-label">Imagenes</label>
+            <input class="form-control" type="file" multiple name="image" (change)="onFileChange($event)" />
+        </div>
+
+        <button type="submit" class="btn btn-login w-100 text-white">
+            Publicar
+        </button>
+    </form>
+
+</div>

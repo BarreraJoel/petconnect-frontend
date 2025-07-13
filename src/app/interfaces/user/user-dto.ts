@@ -1,4 +1,4 @@
-import { UserTypeEnum } from "../enums/user-type";
+import { UserTypeEnum } from "../../enums/user-type";
 
 export interface UserDto {
     first_name: string,

@@ -1,0 +1,115 @@
+<!-- <navbar />
+<loader [isLoading]="isLoading"/>
+
+@if (post) {
+    <div class="d-flex" [style]="{ 'background-color': '#b4937e',}">
+        <div [style]="{ 'width': '40%' }">
+            @if(images) {
+                <p-galleria [value]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true" [showThumbnails]="false" [containerStyle]="{ 'max-width': '640px' }">
+                    <ng-template pTemplate="item" let-item>
+                        <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+                    </ng-template>
+                </p-galleria>
+            }
+        </div>
+        <div [style]="{ 'width': '60%' }">
+            <div class="h-50 w-full">
+                <h4>{{post.title}}</h4>
+                <p>{{post.description}}</p>
+                @if (userPost) {
+                    <div class="d-flex">
+                        @if (userPost.image_url) {
+                            <p-avatar [image]="userPost.image_url ? getImage(userPost.image_url) : 'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png'" class="mr-2" size="large" shape="circle" />
+                        }
+                        @else {
+                            <p-avatar styleClass="mr-2" [style]="{ 'background-color': '#307475', color: '#e8eded' }" shape="circle" icon="pi pi-user" />
+                        }
+                        <p>{{userPost.first_name + " " + userPost.last_name }}</p>
+                    </div>
+                }
+                <small>{{post.city}},{{post.locality}}</small>
+                <p>{{post.created_at|timeAgo}}</p>
+            </div>
+        
+            <div class="h-25">
+                <p-button label="Actualizar" variant="text" icon="pi pi-pencil" (click)="update(post.uuid)" />
+                <p-button label="Eliminar" variant="text" severity="danger" icon="pi pi-times" (click)="delete(post.uuid)" />
+            </div>
+        </div>
+    </div>
+} -->
+
+
+
+<navbar />
+<loader [isLoading]="isLoading" />
+
+@if (post) {
+  <div class="container my-4">
+    <div class="row bg-light rounded shadow-sm overflow-hidden" style="background-color: #b4937e;">
+      
+        <!-- Sección de imágenes -->
+        <div class="col-md-5 p-3">
+            @if(images) {
+                <p-galleria
+                    [value]="images"
+                    [numVisible]="5"
+                    [circular]="true"
+                    [showItemNavigators]="true"
+                    [showThumbnails]="false"
+                    [containerStyle]="{ 'max-width': '100%' }" >
+                    <ng-template pTemplate="item" let-item>
+                        <div class="galleria-img-wrapper">
+                            <img [src]="item.itemImageSrc" />
+                        </div>
+                    </ng-template>
+                </p-galleria>
+            }
+        </div>
+
+        <!-- Sección de datos -->
+        <div class="col-md-7 d-flex flex-column justify-content-between p-4 text-dark">
+            <div>
+                <h4 class="fw-bold inter-semibold">{{ post.title }}</h4>
+                <p class="inter-regular">{{ post.description }}</p>
+
+                @if (userPost) {
+                    <div class="d-flex align-items-center my-3">
+                        @if (userPost.image_url) {
+                            <p-avatar
+                            [image]="userPost.image_url ? getImage(userPost.image_url) : 'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png'"
+                            class="me-2"
+                            size="large"
+                            shape="circle"
+                            />
+                        }
+                        @else {
+                            <p-avatar
+                            styleClass="me-2"
+                            [style]="{ 'background-color': '#307475', color: '#e8eded' }"
+                            shape="circle"
+                            icon="pi pi-user"
+                            />
+                        }
+                        <p class="mb-0 lato-medium">{{ userPost.first_name + " " + userPost.last_name }}</p>
+                    </div>
+                }
+
+                <div class="mb-2">
+                    <small class="d-block lato-regular"><i class="pi pi-map-marker me-1"></i>{{ post.city }}, {{ post.locality }}</small>
+                    <small class="inter-light"><i class="pi pi-clock me-1"></i>{{ post.created_at | timeAgo }}</small>
+                </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="mt-3 d-flex justify-content-end gap-2">
+                <p-button label="Reportar" icon="pi pi-flag" severity="warn" />
+                <p-button label="Actualizar" icon="pi pi-pencil" (click)="update(post.uuid)" />
+                <p-button label="Eliminar" icon="pi pi-times" severity="danger" (click)="delete(post.uuid)" />
+            </div>
+        </div>
+    </div>
+  </div>
+}
+
+<hr>

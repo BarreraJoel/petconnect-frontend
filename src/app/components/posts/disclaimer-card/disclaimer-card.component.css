@@ -1,0 +1,7 @@
+.disclaimer-card {
+  background-color: #f5eee7; /* beige/marrón claro */
+  border-left: 6px solid #a47148; /* marrón más oscuro */
+  border-radius: 12px;
+  max-width: 800px;
+  margin: auto;
+}
