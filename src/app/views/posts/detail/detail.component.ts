@@ -10,12 +10,15 @@ import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { TimeAgoPipe } from '../../../pipes/time-ago.pipe';
 import { LoaderComponent } from '../../../components/animations/loader/loader.component';
+import { ApiResponse } from '../../../interfaces/api-response';
+import { Post } from '../../../models/post/post';
+import { User } from '../../../models/user/user';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
   imports: [
-    FormsModule,LoaderComponent,
+    FormsModule, LoaderComponent,
     NavbarComponent,
     GalleriaModule, AvatarModule, ButtonModule,
     TimeAgoPipe
@@ -25,10 +28,10 @@ import { LoaderComponent } from '../../../components/animations/loader/loader.co
 })
 export class DetailComponent implements OnInit {
 
-  protected userPost: any;
+  protected userPost: User | null = null;
   protected images: any[] | null = null;
   protected postUuid: string = "";
-  protected post: any;
+  protected post: Post | null = null;
   protected isLoading: boolean = true;
 
   constructor(
@@ -44,12 +47,32 @@ export class DetailComponent implements OnInit {
 
   async ngOnInit() {
     let postResponse = await this.postService.get(this.postUuid);
-    this.post = postResponse.data.post;
 
-    let userResponse = await this.userService.get(this.post.user_id);
-    this.userPost = userResponse.data.user;
+    let response = postResponse as ApiResponse<{
+      post: Post
+    }>;
 
-    if (this.post.images_url) {
+    console.log(response);
+
+    if (response) {
+      if (response.data) {
+        this.post = response.data.post;
+
+        let userResponse = await this.userService.get(this.post.user_id);
+
+        if (userResponse) {
+          let responseAux = userResponse as ApiResponse<{
+            user: User
+          }>;
+
+          if (responseAux.data) {
+            this.userPost = responseAux.data.user;
+          }
+        }
+      }
+    }
+
+    if (this.post && this.post.images_url) {
       this.images = [];
       for (const imageUrl of this.post.images_url) {
         this.images?.push({

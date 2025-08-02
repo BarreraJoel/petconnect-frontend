@@ -24,7 +24,7 @@ export class LoginComponent {
       email: this.email,
       password: this.password,
     });
-    console.log(response);
+    // console.log(response.o.json());
 
     this.router.navigateByUrl('');
   }

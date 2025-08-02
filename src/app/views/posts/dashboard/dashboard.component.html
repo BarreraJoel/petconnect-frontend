@@ -1,5 +1,5 @@
 <navbar/>
-<loader [isLoading]="isLoading"/>
+<!-- <loader [isLoading]="isLoading"/> -->
 
 @if(postsPaginate) {
   <div class="container my-4">
@@ -24,13 +24,16 @@
 
     <div class="d-flex flex-wrap justify-content-center">
       @for (post of postsPaginate.data; track $index) {
-        <post-card [post]="post" class="m-2" />
+        @if(post) {
+          <post-card [post]="post" class="m-2" />
+        }
       }
     </div>
 
     <div class="card flex justify-content-center mt-4">
       <p-paginator
-        (onPageChange)="onPageChange($event)" 
+        (onPageChange)="onPageChange($event)"
+        showFirstLastIcon="false" 
         [first]="postsPaginate.from"
         [rows]="postsPaginate.per_page"
         [totalRecords]="postsPaginate.total" />

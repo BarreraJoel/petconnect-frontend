@@ -10,6 +10,8 @@ import { PaginatorModule } from 'primeng/paginator';
 import { PaginateService } from '../../../services/paginate.service';
 import { LoaderComponent } from '../../../components/animations/loader/loader.component';
 import { DisclaimerCardComponent } from '../../../components/posts/disclaimer-card/disclaimer-card.component';
+import { ApiResponse } from '../../../interfaces/api-response';
+import { Post } from '../../../models/post/post';
 
 interface Option {
   name: string;
@@ -47,11 +49,17 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit() {
     let response = await this.postService.getAll();
-    this.postsPaginate = response.data.posts;
+    if (response) {
+      let apiResponse = response as ApiResponse<{
+        posts: Post[]
+      }>;
 
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 1500);
+      this.postsPaginate = apiResponse.data?.posts;
+
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1500);
+    }
   }
 
   protected redirect(route: string) {
@@ -73,9 +81,14 @@ export class DashboardComponent implements OnInit {
 
   private async changePostPaginate(urlPage: string) {
     let response = await this.paginateService.getData(urlPage);
-    this.postsPaginate = response.data.posts;
-    console.log(this.postsPaginate);
+    let postResponse = response as ApiResponse<{
+      posts: Post[]
+    }>;
+    if (postResponse && postResponse.data) {
+      this.postsPaginate = postResponse.data.posts;
+      console.log(this.postsPaginate);
 
+    }
   }
 
 

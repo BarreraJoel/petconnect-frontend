@@ -7,10 +7,12 @@ import { firstValueFrom } from 'rxjs';
 })
 export class PaginateService {
 
-  constructor(private apiService: ApiService<any>) { }
+  constructor(private apiService: ApiService) { }
 
   public async getData(url: string) {
-    return firstValueFrom(this.apiService.get(url));
+    return this.apiService.get(url, {
+      headers: {}
+    });
   }
 
 }

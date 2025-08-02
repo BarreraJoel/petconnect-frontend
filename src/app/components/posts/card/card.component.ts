@@ -11,13 +11,16 @@ import { PostTypeEnumPipe } from '../../../pipes/post-type-enum.pipe';
 import { PostTypeTagPipe } from '../../../pipes/post-type-tag.pipe';
 import { TimeAgoPipe } from '../../../pipes/time-ago.pipe';
 import { StorageService } from '../../../services/storage/storage.service';
+import { SkeletonModule } from 'primeng/skeleton';
+import { ApiResponse } from '../../../interfaces/api-response';
+import { User } from '../../../models/user/user';
 
 @Component({
   selector: 'post-card',
   standalone: true,
   imports: [
     UpperCasePipe, TruncatePipe, PostTypeEnumPipe, PostTypeTagPipe, TimeAgoPipe,
-    ButtonModule, CardModule, AvatarModule, TagModule
+    ButtonModule, CardModule, AvatarModule, TagModule, SkeletonModule
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
@@ -26,7 +29,7 @@ export class CardComponent implements OnInit {
 
   @Input() post: any;
   protected userPost: any;
-  protected users: any[] | null = null;
+  protected users: User[] | null = null;
 
   constructor(
     private router: Router,
@@ -37,10 +40,19 @@ export class CardComponent implements OnInit {
   async ngOnInit() {
     let userResponse = await this.userService.getAll();
     console.log(userResponse);
-    
-    this.users = userResponse.data.users;
-    if (this.users) {
-      this.findUser(this.users, this.post.user_id);
+
+    if (userResponse) {
+
+      let response = userResponse as ApiResponse<{
+        users: User[]
+      }>;
+
+      if (response.data) {
+        this.users = response.data?.users;
+        if (this.users) {
+          this.findUser(this.users, this.post.user_id);
+        }
+      }
     }
   }
 
