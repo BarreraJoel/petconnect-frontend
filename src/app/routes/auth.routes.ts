@@ -2,11 +2,11 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path: 'login',
+        path: 'sign-in',
         loadComponent: () => import('../views/auth/login/login.component').then(c => c.LoginComponent)
     },
     {
-        path: 'register',
+        path: 'sign-up',
         loadComponent: () => import('../views/auth/register/register.component').then(c => c.RegisterComponent)
     },
     {

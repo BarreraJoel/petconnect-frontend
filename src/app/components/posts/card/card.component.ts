@@ -60,8 +60,8 @@ export class CardComponent implements OnInit {
     this.router.navigateByUrl(`posts/${uuid}`);
   }
 
-  protected getImagePath() {
-    return this.storageService.getImage(this.post.images_url[0]);
+  protected getImagePath(url:string) {
+    return this.storageService.getImage(url);
   }
 
   protected findUser(users: any[], uuid: string) {

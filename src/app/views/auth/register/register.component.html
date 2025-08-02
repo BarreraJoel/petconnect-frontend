@@ -40,9 +40,17 @@
                 formControlName="password_confirmation" />
         </div>
 
+        <div class="mb-3">
+            <label for="text" class="form-label">Foto de perfil</label>
+            <input class="form-control" type="file" name="image" (change)="onFileChange($event)" />
+        </div>
+
         <button type="submit" class="btn btn-login w-100 text-white">
             Registrar
         </button>
     </form>
+    <p>¿Ya está registrado/a?
+        <a routerLink="/auth/sign-in">Iniciar Sesión</a>
+    </p>
 
 </div>
