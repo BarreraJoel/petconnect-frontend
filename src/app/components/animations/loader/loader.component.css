@@ -4,13 +4,14 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #578190;
+  background-color: #e0e9eca0;
+  opacity: 75%;
   z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 1;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.1s ease;
 }
 
 .loader-backdrop.fade-out {

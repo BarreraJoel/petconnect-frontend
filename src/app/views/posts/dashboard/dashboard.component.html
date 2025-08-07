@@ -1,6 +1,3 @@
-<navbar/>
-<!-- <loader [isLoading]="isLoading"/> -->
-
 @if(postsPaginate) {
   <div class="container my-4">
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
@@ -18,7 +15,7 @@
             class="w-full md:w-56" />
         </div>
 
-        <p-button label="Agregar" icon="pi pi-plus" (click)="redirect('posts/create')" />
+        <p-button label="Publicar" severity="info" icon="pi pi-plus" (click)="redirect('posts/create')" />
       </div>
     </div>
 
@@ -41,9 +38,3 @@
   </div>
 
 }
-
-<hr>
-
-<disclaimer-card />
-
-<hr>

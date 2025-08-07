@@ -1,14 +1,20 @@
 <div class="login-container">
     <h3 class="text-center mb-4">Iniciar Sesión</h3>
-    <form (ngSubmit)="login()">
+    <form [formGroup]="frm" (ngSubmit)="login()">
         <div class="mb-3">
             <label for="email" class="form-label">Correo electrónico</label>
-            <input class="form-control" type="email" placeholder="Email" [(ngModel)]="email" name="email" />
+            <input class="form-control" type="email" placeholder="Ingrese el correo electrónico" formControlName="email" name="email" />
+            @if(verifyControlErrors('email')){
+                <alert [message]="getErrorMessage('email')" />
+            }
         </div>
 
         <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
-            <input class="form-control" type="password" placeholder="Password" [(ngModel)]="password" name="password" />
+            <input class="form-control" type="password" placeholder="Password" formControlName="password" name="password" />
+            @if(verifyControlErrors('password')){
+                <alert [message]="getErrorMessage('password')" />
+            }
         </div>
 
         <button type="submit" class="btn btn-login w-100 text-white">Ingresar</button>

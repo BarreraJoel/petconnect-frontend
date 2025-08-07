@@ -29,7 +29,6 @@ export class CardComponent implements OnInit {
 
   @Input() post: any;
   protected userPost: any;
-  protected users: User[] | null = null;
 
   constructor(
     private router: Router,
@@ -38,21 +37,9 @@ export class CardComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    let userResponse = await this.userService.getAll();
-    console.log(userResponse);
-
-    if (userResponse) {
-
-      let response = userResponse as ApiResponse<{
-        users: User[]
-      }>;
-
-      if (response.data) {
-        this.users = response.data?.users;
-        if (this.users) {
-          this.findUser(this.users, this.post.user_id);
-        }
-      }
+    await this.userService.loadUsers();
+    if (this.userService.users) {
+      this.findUser(this.userService.users, this.post.user_id);
     }
   }
 
@@ -60,11 +47,11 @@ export class CardComponent implements OnInit {
     this.router.navigateByUrl(`posts/${uuid}`);
   }
 
-  protected getImagePath(url:string) {
+  protected getImagePath(url: string) {
     return this.storageService.getImage(url);
   }
 
-  protected findUser(users: any[], uuid: string) {
+  protected findUser(users: User[], uuid: string) {
     for (const user of users) {
       if (user.uuid == uuid) {
         this.userPost = user;

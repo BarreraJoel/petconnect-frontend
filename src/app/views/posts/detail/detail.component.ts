@@ -3,23 +3,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../../../services/posts/post.service';
 import { GalleriaModule } from 'primeng/galleria';
 import { FormsModule } from '@angular/forms';
-import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { StorageService } from '../../../services/storage/storage.service';
 import { UserService } from '../../../services/users/user.service';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { TimeAgoPipe } from '../../../pipes/time-ago.pipe';
-import { LoaderComponent } from '../../../components/animations/loader/loader.component';
 import { ApiResponse } from '../../../interfaces/api-response';
 import { Post } from '../../../models/post/post';
 import { User } from '../../../models/user/user';
+import { SkeletonComponent } from '../../../components/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
   imports: [
-    FormsModule, LoaderComponent,
-    NavbarComponent,
+    FormsModule, SkeletonComponent,
     GalleriaModule, AvatarModule, ButtonModule,
     TimeAgoPipe
   ],
@@ -101,5 +99,8 @@ export class DetailComponent implements OnInit {
     this.router.navigateByUrl(`posts`);
   }
 
+  redirectUserProfile() {
+    this.router.navigateByUrl(`profile/${this.userPost?.uuid}`);
+  }
 
 }

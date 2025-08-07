@@ -1,0 +1,51 @@
+@if (user) {
+  <div class="container my-4">
+    <div class="row bg-light rounded shadow-sm overflow-hidden" style="background-color: #b4937e;">
+
+        <!-- Datos personales -->
+        <div class="col-md-4 p-3 ">
+            <div class="w-100 text-center">
+                @if(user.image_url) {
+                    <img [src]="getImagePath(user.image_url)" alt="img">
+                }
+                @else {
+                    <p-avatar icon="pi pi-user" size="large"  shape="circle"></p-avatar>
+                }
+            </div>
+            
+            <div class="col-md-7 d-flex flex-column justify-content-between p-4 text-dark">
+                <div>
+                    <section>
+                        <h6 class="fw-bold inter-semibold">DATOS PERSONALES</h6>
+                        <p-tag [severity]="user.type | userTypeTag" [value]="user.type|userTypeEnum" [rounded]="true" />
+                        <div class="w-100">
+                            <p class="inter-regular">Nombre: {{ user.first_name }} {{ user.last_name }}</p> 
+                            <p class="inter-regular">Email: {{ user.email }}</p>
+
+                        </div>
+                    </section>
+                    
+                    <div class="mb-2">
+                        <!-- <small class="d-block lato-regular"><i class="pi pi-map-marker me-1"></i>{{ post.city }}, {{ post.locality }}</small>
+                        <small class="inter-light"><i class="pi pi-clock me-1"></i>{{ user.created_at | timeAgo }}</small> -->
+                    </div>
+                </div>
+                <p-button label="Editar" icon="pi pi-pencil" severity="warn" />
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div>
+                <h4>PUBLICACIONES</h4>
+                @if(postsPaginate) {
+                    <list-posts [postsPaginate]="postsPaginate" />
+                }
+            </div>
+        </div>
+    </div>
+  </div>
+}
+@else {
+    <skeleton />
+}
+

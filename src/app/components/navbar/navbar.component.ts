@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputIcon } from 'primeng/inputicon';
 import { IconField } from 'primeng/iconfield';
 import { InputTextModule } from 'primeng/inputtext';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'navbar',
@@ -18,22 +19,41 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  items: any[] | undefined;
+  protected items: { label: string, icon: string, route: string }[] = [
+    {
+      label: 'Publicaciones', icon: 'pi pi-pencil', route: 'posts',
+    },
+  ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, protected authService: AuthService) { }
 
-  ngOnInit() {
-    this.items = [
-      {
-        label: 'Publicaciones',
-        icon: 'pi pi-pencil',
-        route: 'posts',
-      },
-    ];
+  async ngOnInit() {
+    try {
+      await this.authService.loadUser();
+    } catch (error) {
+
+    }
   }
 
-  protected redirect(route: string) {
+  protected redirectProfile() {
+    if (this.authService.userLogin) {
+      this.router.navigateByUrl(`profile/${this.authService.userLogin?.uuid}`);
+    }
+  }
+
+  protected redirect(route: string, logged: boolean = false) {
+    if (logged && this.authService.userLogin) {
+      this.router.navigateByUrl(route);
+    }
     this.router.navigateByUrl(route);
+
+  }
+
+  protected async logout() {
+    await this.authService.logout();
+    this.authService.userLogin = null;
+    console.log(this.authService.userLogin);
+    this.redirect('auth/sign-in');
   }
 
 }

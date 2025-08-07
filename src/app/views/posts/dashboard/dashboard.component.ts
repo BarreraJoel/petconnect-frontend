@@ -3,15 +3,13 @@ import { PostService } from '../../../services/posts/post.service';
 import { Router } from '@angular/router';
 import { CardComponent } from '../../../components/posts/card/card.component';
 import { ButtonModule } from 'primeng/button';
-import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { PaginatorModule } from 'primeng/paginator';
 import { PaginateService } from '../../../services/paginate.service';
-import { LoaderComponent } from '../../../components/animations/loader/loader.component';
-import { DisclaimerCardComponent } from '../../../components/posts/disclaimer-card/disclaimer-card.component';
 import { ApiResponse } from '../../../interfaces/api-response';
 import { Post } from '../../../models/post/post';
+import { LoaderComponent } from '../../../components/animations/loader/loader.component';
 
 interface Option {
   name: string;
@@ -22,7 +20,7 @@ interface Option {
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CardComponent, NavbarComponent, LoaderComponent, DisclaimerCardComponent,
+    CardComponent, LoaderComponent,
     ButtonModule, Select, PaginatorModule,
     FormsModule
   ],
@@ -48,18 +46,14 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    let response = await this.postService.getAll();
-    if (response) {
-      let apiResponse = response as ApiResponse<{
-        posts: Post[]
-      }>;
+    await this.postService.loadPosts();
 
-      this.postsPaginate = apiResponse.data?.posts;
+    this.postsPaginate = this.postService.posts;
+    console.log(this.postsPaginate);
 
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 1500);
-    }
+    // setTimeout(() => {
+    //   this.isLoading = false;
+    // }, 1500);
   }
 
   protected redirect(route: string) {

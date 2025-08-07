@@ -1,51 +1,75 @@
 <div class="login-container">
     <h3 class="text-center mb-4">Registrar</h3>
     <form [formGroup]="frm" (ngSubmit)="register()">
-        <div class="mb-3">
-            <label for="email" class="form-label">Correo electrónico</label>
-            <input class="form-control" type="email" placeholder="Ingrese el correo electrónico" formControlName="email"
-                name="email" />
-        </div>
 
         <div class="mb-3">
-            <label for="firstName" class="form-label">Nombre</label>
+            <label for="firstName" class="form-label">Nombre *</label>
             <input class="form-control" type="text" placeholder="Ingrese el nombre" formControlName="first_name"
                 name="first_name" />
+            @if(verifyControlErrors('first_name')){
+                <alert [message]="getErrorMessage('first_name')" />
+            }
+
         </div>
 
         <div class="mb-3">
-            <label for="lastName" class="form-label">Apellido</label>
+            <label for="lastName" class="form-label">Apellido *</label>
             <input class="form-control" type="text" placeholder="Ingrese el apellido" formControlName="last_name"
                 name="last_name" />
+            @if(verifyControlErrors('last_name')){
+                <alert [message]="getErrorMessage('last_name')" />
+            }
+
         </div>
 
         <div class="mb-3">
-            <label for="type" class="form-label">Tipo</label>
+            <label for="type" class="form-label">Seleccione un perfil *</label>
             <select class="form-control" name="type" formControlName="type" id="">
                 @for (enum of typeEnum; track $index) {
-                    <option value="enum">{{enum}}</option>
+                    <option value="enum">{{enum|userTypeEnum}}</option>
                 }
             </select>
+            @if(verifyControlErrors('type')){
+                <alert [message]="getErrorMessage('type')" />
+            }
+
         </div>
 
         <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
+            <label for="email" class="form-label">Correo electrónico *</label>
+            <input class="form-control" type="email" placeholder="Ingrese el correo electrónico" formControlName="email"
+                name="email" />
+            <!-- @if(getControl("email")?.dirty || getControl("email")?.touched) {
+            } -->
+            @if(verifyControlErrors('email')){
+                <alert [message]="getErrorMessage('email')" />
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña *</label>
             <input class="form-control" type="password" placeholder="Ingrese la contraseña" formControlName="password"
                 name="password" />
+            @if(verifyControlErrors('password')){
+                <alert [message]="getErrorMessage('password')" />
+            }
         </div>
 
         <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
+            <label for="password_confirmation" class="form-label">Confirmar contraseña *</label>
             <input class="form-control" type="password" placeholder="Confirme la contraseña"
                 formControlName="password_confirmation" />
+            @if(verifyControlErrors('password_confirmation')){
+                <alert [message]="getErrorMessage('password_confirmation')" />
+            }
         </div>
 
         <div class="mb-3">
-            <label for="text" class="form-label">Foto de perfil</label>
+            <label for="text" class="form-label">Foto de perfil (opcional)</label>
             <input class="form-control" type="file" name="image" (change)="onFileChange($event)" />
         </div>
 
-        <button type="submit" class="btn btn-login w-100 text-white">
+        <button type="submit" class="btn btn-login w-100 text-white" [disabled]="!frm.valid">
             Registrar
         </button>
     </form>
