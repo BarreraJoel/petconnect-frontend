@@ -1,51 +1,51 @@
+<navbar />
+
 @if (user) {
-  <div class="container my-4">
-    <div class="row bg-light rounded shadow-sm overflow-hidden" style="background-color: #b4937e;">
 
-        <!-- Datos personales -->
-        <div class="col-md-4 p-3 ">
-            <div class="w-100 text-center">
-                @if(user.image_url) {
-                    <img [src]="getImagePath(user.image_url)" alt="img">
-                }
-                @else {
-                    <p-avatar icon="pi pi-user" size="large"  shape="circle"></p-avatar>
-                }
-            </div>
-            
-            <div class="col-md-7 d-flex flex-column justify-content-between p-4 text-dark">
-                <div>
-                    <section>
-                        <h6 class="fw-bold inter-semibold">DATOS PERSONALES</h6>
-                        <p-tag [severity]="user.type | userTypeTag" [value]="user.type|userTypeEnum" [rounded]="true" />
-                        <div class="w-100">
-                            <p class="inter-regular">Nombre: {{ user.first_name }} {{ user.last_name }}</p> 
-                            <p class="inter-regular">Email: {{ user.email }}</p>
+    <div class="profile-container">
+        <div class="cover"></div>
 
-                        </div>
-                    </section>
-                    
-                    <div class="mb-2">
-                        <!-- <small class="d-block lato-regular"><i class="pi pi-map-marker me-1"></i>{{ post.city }}, {{ post.locality }}</small>
-                        <small class="inter-light"><i class="pi pi-clock me-1"></i>{{ user.created_at | timeAgo }}</small> -->
-                    </div>
-                </div>
-                <p-button label="Editar" icon="pi pi-pencil" severity="warn" />
-            </div>
+        <div class="profile-pic">
+            <img [src]="user.image_url ? getImagePath(user.image_url) : 'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png'" alt="profile">
         </div>
-        
-        <div class="col-md-8">
-            <div>
-                <h4>PUBLICACIONES</h4>
-                @if(postsPaginate) {
-                    <list-posts [postsPaginate]="postsPaginate" />
-                }
+            
+        <div class="info">
+            <h2 class="nunito-bold">{{user.first_name}} {{user.last_name}}</h2>
+            <div class="social-pills">
+                <span class="pill nunito-bold">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </span>
+                <span class="pill nunito-bold">
+                    <i class="fa-brands fa-x-twitter"></i> Twitter
+                </span>
+                <span class="pill nunito-bold">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </span>
+                <span class="pill nunito-bold">
+                    <i class="fa-brands fa-linkedin"></i> Linkedin
+                </span>
+                <span class="pill nunito-bold">
+                    <i class="fa-solid fa-phone"></i> Teléfono
+                </span>
+                <span class="pill nunito-bold">
+                    <i class="fa-solid fa-envelope"></i> Correo Electrónico
+                </span>
             </div>
         </div>
     </div>
-  </div>
+    <div class="col-md-12">
+        <div>
+            <h4>PUBLICACIONES</h4>
+            @if(postsPaginate) {
+                <list-posts [postsPaginate]="postsPaginate" />
+            }
+            @else {
+                <h6>Todavía no realizo publicaciones</h6>
+            }
+        </div>
+    </div>
+
 }
 @else {
     <skeleton />
 }
-

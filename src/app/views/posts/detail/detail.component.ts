@@ -12,12 +12,13 @@ import { ApiResponse } from '../../../interfaces/api-response';
 import { Post } from '../../../models/post/post';
 import { User } from '../../../models/user/user';
 import { SkeletonComponent } from '../../../components/skeleton/skeleton.component';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
   imports: [
-    FormsModule, SkeletonComponent,
+    FormsModule, SkeletonComponent, NavbarComponent,
     GalleriaModule, AvatarModule, ButtonModule,
     TimeAgoPipe
   ],
@@ -50,8 +51,6 @@ export class DetailComponent implements OnInit {
       post: Post
     }>;
 
-    console.log(response);
-
     if (response) {
       if (response.data) {
         this.post = response.data.post;
@@ -79,10 +78,6 @@ export class DetailComponent implements OnInit {
       }
     }
 
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 3000);
-
   }
 
   protected getImage(imageUrl: string) {
@@ -95,7 +90,6 @@ export class DetailComponent implements OnInit {
 
   protected async delete(uuid: string) {
     let response = await this.postService.delete(uuid);
-    console.log(response);
     this.router.navigateByUrl(`posts`);
   }
 

@@ -1,22 +1,19 @@
-.login-container {
-    max-width: 400px;
-    margin: 5rem auto;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+.login-page {
+  min-height: 100vh;
+  /* verde de fondo */
+  /* background-color: #a8c8a5;  */
 }
 
-.form-control:focus {
-    box-shadow: none;
-    border-color: #6c63ff;
+.login-card {
+  background-color: #f7f4ef; /* color crema */
+  max-width: 1000px;
+  width: 90%;
 }
 
-.btn-login {
-    background-color: #6c63ff;
-    border: none;
+.form-section {
+  background-color: white;
 }
 
-.btn-login:hover {
-    background-color: #574fe1;
+.image-section {
+  background-color: #f7f4ef;
 }

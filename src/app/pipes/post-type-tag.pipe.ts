@@ -8,19 +8,22 @@ import { Severity } from '../types/severity';
 })
 export class PostTypeTagPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): Severity {
+  transform(value: unknown, ...args: unknown[]) {
     switch (value) {
       case PostTypeEnum.ADOPT:
-        return "warn";
+        // return "warn";
+        return 'bg-primary';
         break;
       case PostTypeEnum.LOST:
-        return 'danger';
+        // return 'danger';
+        return 'bg-warning'
         break;
       case PostTypeEnum.FOUND:
-        return 'success';
+        // return 'success';
+        return 'bg-success';
         break;
       default:
-        return 'info';
+        return 'bg-danger';
         break;
     }
   }

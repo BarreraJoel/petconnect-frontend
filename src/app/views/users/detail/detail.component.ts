@@ -8,21 +8,18 @@ import { User } from '../../../models/user/user';
 import { ApiResponse } from '../../../interfaces/api-response';
 import { StorageService } from '../../../services/storage/storage.service';
 import { SkeletonComponent } from '../../../components/skeleton/skeleton.component';
-import { TagModule } from 'primeng/tag';
-import { UserTypeEnumPipe } from '../../../pipes/user-type-enum.pipe';
-import { UserTypeTagPipe } from '../../../pipes/user-type-tag.pipe';
 import { PostService } from '../../../services/posts/post.service';
 import { PaginateService } from '../../../services/paginate.service';
 import { ListComponent } from '../../../components/posts/list/list.component';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
   imports: [
     FormsModule,
-    SkeletonComponent,ListComponent,
-    UserTypeEnumPipe, UserTypeTagPipe,
-    AvatarModule, ButtonModule, TagModule,
+    SkeletonComponent, ListComponent, NavbarComponent,
+    AvatarModule, ButtonModule,
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'
@@ -46,20 +43,11 @@ export class DetailComponent implements OnInit {
   }
 
   async ngOnInit() {
-    let responsePosts = await this.postService.getByUserId(this.userUuid);
-    let postsResponse = responsePosts as ApiResponse<{
-      posts: any[]
-    }>;
-    console.log(postsResponse);
-    
-    if (postsResponse && postsResponse.data) {
-      this.postsPaginate = postsResponse.data.posts;
-    }
+    await this.loadPosts();
+    await this.loadUser();
+  }
 
-    console.log(this.postsPaginate);
-
-    // console.log(this.userUuid);
-
+  private async loadUser() {
     let response = await this.userService.get(this.userUuid);
     if (response) {
       let userResponse = response as ApiResponse<{
@@ -68,9 +56,21 @@ export class DetailComponent implements OnInit {
 
       if (userResponse && userResponse.data) {
         this.user = userResponse.data.user;
-        console.log(this.user);
       }
     }
+  }
+
+  private async loadPosts() {
+    let responsePosts = await this.postService.getByUserId(this.userUuid);
+    let postsResponse = responsePosts as ApiResponse<{
+      posts: any
+    }>;
+
+    if (postsResponse && postsResponse.data) {
+      this.postsPaginate = postsResponse.data.posts.total > 0 ? postsResponse.data.posts : null;
+    }
+    console.log(postsResponse.data);
+
   }
 
   protected getImagePath(url: string) {

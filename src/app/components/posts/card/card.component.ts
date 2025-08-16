@@ -11,16 +11,17 @@ import { PostTypeEnumPipe } from '../../../pipes/post-type-enum.pipe';
 import { PostTypeTagPipe } from '../../../pipes/post-type-tag.pipe';
 import { TimeAgoPipe } from '../../../pipes/time-ago.pipe';
 import { StorageService } from '../../../services/storage/storage.service';
-import { SkeletonModule } from 'primeng/skeleton';
 import { ApiResponse } from '../../../interfaces/api-response';
 import { User } from '../../../models/user/user';
+import { SkeletonComponent } from '../../skeleton/skeleton.component';
 
 @Component({
   selector: 'post-card',
   standalone: true,
   imports: [
+    SkeletonComponent,
     UpperCasePipe, TruncatePipe, PostTypeEnumPipe, PostTypeTagPipe, TimeAgoPipe,
-    ButtonModule, CardModule, AvatarModule, TagModule, SkeletonModule
+    ButtonModule, CardModule, AvatarModule, TagModule,
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'

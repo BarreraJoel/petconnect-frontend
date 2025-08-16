@@ -16,12 +16,14 @@ export class PostService {
   constructor(private apiService: ApiService) { }
 
   public async loadPosts() {
-    let response = await this.getAll();
-    let postsResponse = response as ApiResponse<{
-      posts: Post[]
-    }>;
-    if (postsResponse && postsResponse.data) {
-      this.posts = postsResponse.data.posts;
+    if (!this.posts) {
+      let response = await this.getAll();
+      let postsResponse = response as ApiResponse<{
+        posts: Post[]
+      }>;
+      if (postsResponse && postsResponse.data) {
+        this.posts = postsResponse.data.posts;
+      }
     }
   }
 

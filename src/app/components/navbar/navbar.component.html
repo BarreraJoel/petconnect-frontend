@@ -1,28 +1,31 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark shadow-sm px-4 py-2">
-  <div class="container-fluid d-flex justify-content-between align-items-center">
-    
-    <div class="navbar-start d-flex align-items-center">
-      <img src="assets/img/logo2.png" alt="Logo" width="50" height="50" class="me-2">
+@if(authService.userLogin) {
+  <nav class="navbar navbar-expand-lg shadow-sm py-3">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">MyApp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-link" routerLink="/posts">
+            Publicaciones
+          </li>
+          <li class="nav-link" [routerLink]="['/profile', authService.userLogin.uuid]">
+            Mi cuenta
+            <!-- <a class="nav-link">
+                
+              </a> -->
+          </li>
+        </ul>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-soft-red" (click)="logout()">
+          <span class="material-icons">logout</span> Cerrar sesión
+        </button>
+      </div>
+
     </div>
-    
-    <div class="navbar-end d-flex align-items-center gap-3">
-      @if(authService.userLogin) {
-        @for (item of items; track $index) {
-          <p-button pRipple [label]="item.label" variant="text" [icon]="item.icon ? item.icon : ''" severity="contrast"  (click)="redirect(item.route, true)" />
-        }
-        <p-button pRipple label="Mi cuenta" variant="text" icon="pi pi-user" severity="contrast"
-        (click)="redirectProfile()" />
-        <p-iconfield>
-          <p-inputicon styleClass="pi pi-search" />
-          <input type="text" pInputText placeholder="Buscar" />
-        </p-iconfield>
-        <p-button pRipple label="Cerrar Sesión" variant="text" icon="pi pi-times" severity="danger"
-        (click)="logout()" />
-      }
-      @else {
-        <p-button pRipple label="Iniciar Sesión" variant="text" icon="pi pi-sign-in" severity="contrast"  (click)="redirect('/auth/sign-in')" />
-        <p-button pRipple label="Registrar" variant="text" icon="pi pi-user-plus" severity="contrast"  (click)="redirect('auth/sign-up')" />
-      }
-    </div>
-  </div>
-</nav>
+  </nav>
+}

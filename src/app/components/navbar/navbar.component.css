@@ -1,0 +1,16 @@
+@import "../../../../public/assets/css/buttons.css";
+
+.navbar {
+  background-color: #fdfbf6; /* crema muy suave */
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #555; /* gris medio */
+  transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #333; /* gris oscuro al hover */
+}

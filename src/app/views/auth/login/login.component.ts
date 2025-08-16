@@ -6,18 +6,23 @@ import { ApiResponse } from '../../../interfaces/api-response';
 import { User } from '../../../models/user/user';
 import { Validator } from '../../../classes/validator';
 import { AlertComponent } from '../../../components/alert/alert.component';
+import { NavbarAuthComponent } from '../../../components/navbar/navbar-auth/navbar-auth.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, AlertComponent],
+  imports: [
+    ReactiveFormsModule, RouterLink, FormsModule,
+    AlertComponent, NavbarAuthComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  protected email: string = "";
+  protected email: string = "juan@mail.com";
   protected password: string = "12345678";
+  protected remember = false;
   protected frm: FormGroup = new FormGroup({});
 
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
@@ -26,7 +31,7 @@ export class LoginComponent {
 
   private createForm() {
     this.frm = this.fb.group({
-      'email': ['natalia@mail.com', [Validators.required, Validators.email]],
+      'email': ['juan@mail.com', [Validators.required, Validators.email]],
       'password': ['12345678', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     });
   }
@@ -70,7 +75,6 @@ export class LoginComponent {
       this.router.navigateByUrl('');
     }
   }
-
 
 
 }

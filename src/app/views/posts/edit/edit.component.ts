@@ -28,7 +28,6 @@ export class EditComponent implements OnInit {
 
     let uuid = this.actRoute.snapshot.paramMap.get('uuid');
     this.postUuid = <string>uuid;
-    console.log(uuid);
 
     this.frm = this.fb.group({
       'title': [''],
@@ -60,8 +59,6 @@ export class EditComponent implements OnInit {
 
   protected async update() {
     let response = await this.postService.update(this.frm?.value, this.postUuid);
-    console.log(response);
-
     this.router.navigateByUrl('posts');
   }
 

@@ -1,54 +1,41 @@
 @if(userPost) {
 
-  <p-card [style]="{ width: '17rem' }" (click)="detail(post.uuid)">
-    <ng-template pTemplate="header">
-      <img alt="Card" class="w-full" [style]="{ width: '100%', height:'250px' }"
-      [src]="post.images_url ? getImagePath(post.images_url[0]): 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'" />
-  </ng-template>
-  <ng-template pTemplate="title">
-    <p-tag [severity]="post.type|postTypeTag" [value]="post.type|postTypeEnum" [rounded]="true" />
-    <br>
-    <h4 class="nunito-bold">{{post.title|truncate:20|uppercase}}</h4>
-  </ng-template>
-  <ng-template pTemplate="subtitle">
-    <p class="lato-regular">{{post.city}}, {{post.locality}}</p>
-  </ng-template>
-  <p class="inter-regular">{{post.description|truncate:30}}</p>
-  <ng-template pTemplate="footer">
-    <div class="d-flex align-items-center my-3">
-      <!-- @if (userPost) { -->
-        @if (userPost.image_url) {
-          <p-avatar 
-          [image]="userPost.image_url ? getImagePath(userPost.image_url) : 'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png'"
-          class="me-2"
-          size="large"
-          shape="circle"
-          />
-        }
-        @else {
-          <p-avatar styleClass="me-2" [style]="{ 'background-color': '#307475', color: '#e8eded' }" shape="circle" icon="pi pi-user" />
-        }
-        <p class="mb-0 lato-medium">{{ userPost.first_name + " " + userPost.last_name }}</p>
-      <!-- } -->
+  <div class="card shadow-sm border-0 rounded-4">
+
+    <div class="position-relative">
+      <img [src]="post.images_url ? getImagePath(post.images_url[0]): 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'" class="card-img-top rounded-top-4 img-fixed" alt="...">
+      <span class="badge position-absolute top-0 start-0 m-2 px-3 py-2 rounded-pill shadow" [class]="post.type|postTypeTag">
+        {{ post.type|postTypeEnum }}
+      </span>
     </div>
-    <p class="inter-light">{{post.created_at|timeAgo}}</p>
-  </ng-template>
-</p-card>
+
+    <div class="card-body">
+
+        <!-- Avatar + Nombre + Fecha -->
+        <div class="d-flex align-items-center mb-3">
+          <img [src]="userPost.image_url ? getImagePath(userPost.image_url) : 'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png'" class="rounded-circle me-2" width="40" height="40" alt="avatar">
+          <div>
+            <div class="fw-semibold">{{userPost.first_name}} {{userPost.last_name}}</div>
+            <small class="text-muted">Publicado {{post.created_at|timeAgo}}</small>
+          </div>
+        </div>
+
+        <!-- Título + Descripción -->
+        <h5 class="card-title fw-bold">{{post.title|truncate:20|uppercase}}</h5>
+        <p class="card-text text-muted">{{post.description|truncate:30}}</p>
+
+        <!-- Botón -->
+        <button class="btn btn-soft-teal" (click)="detail(post.uuid)">
+          Leer más <span class="material-icons">keyboard_arrow_right</span> 
+        </button>
+        <!-- <span class="material-symbols-outlined">
+keyboard_double_arrow_right
+</span> -->
+
+        <!-- <button class="btn btn-success rounded-pill">Leer más</button> -->
+      </div>
+    </div>
 }
 @else {
-  <div class="rounded border border-surface-200 dark:border-surface-700 bg-dark p-6 bg-surface-0 dark:bg-surface-900">
-    <div class="flex mb-4">
-        <p-skeleton shape="circle" size="4rem" styleClass="mr-2" />
-        <div>
-            <p-skeleton width="10rem" styleClass="mb-2" />
-            <p-skeleton width="5rem" styleClass="mb-2" />
-            <p-skeleton height=".5rem" />
-        </div>
-    </div>
-    <p-skeleton width="100%" height="150px" />
-    <div class="flex justify-between mt-4">
-        <p-skeleton width="4rem" height="2rem" />
-        <p-skeleton width="4rem" height="2rem" />
-    </div>
-  </div>
+  <skeleton />
 }

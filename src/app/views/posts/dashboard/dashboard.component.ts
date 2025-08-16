@@ -9,7 +9,9 @@ import { PaginatorModule } from 'primeng/paginator';
 import { PaginateService } from '../../../services/paginate.service';
 import { ApiResponse } from '../../../interfaces/api-response';
 import { Post } from '../../../models/post/post';
-import { LoaderComponent } from '../../../components/animations/loader/loader.component';
+import { SkeletonComponent } from '../../../components/skeleton/skeleton.component';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
+import { ListComponent } from '../../../components/posts/list/list.component';
 
 interface Option {
   name: string;
@@ -20,9 +22,9 @@ interface Option {
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CardComponent, LoaderComponent,
+    CardComponent, SkeletonComponent, ListComponent,
     ButtonModule, Select, PaginatorModule,
-    FormsModule
+    FormsModule, NavbarComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -47,13 +49,7 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit() {
     await this.postService.loadPosts();
-
     this.postsPaginate = this.postService.posts;
-    console.log(this.postsPaginate);
-
-    // setTimeout(() => {
-    //   this.isLoading = false;
-    // }, 1500);
   }
 
   protected redirect(route: string) {
@@ -68,9 +64,6 @@ export class DashboardComponent implements OnInit {
         break;
       }
     }
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 900);
   }
 
   private async changePostPaginate(urlPage: string) {
@@ -80,8 +73,6 @@ export class DashboardComponent implements OnInit {
     }>;
     if (postResponse && postResponse.data) {
       this.postsPaginate = postResponse.data.posts;
-      console.log(this.postsPaginate);
-
     }
   }
 

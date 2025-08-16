@@ -5,6 +5,7 @@ import { UserDto } from '../../interfaces/user/user-dto';
 import { UserAuthDto } from '../../interfaces/user/user-auth-dto';
 import { User } from '../../models/user/user';
 import { ApiResponse } from '../../interfaces/api-response';
+import { CookieService } from '../cookies/cookie.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,6 @@ export class AuthService {
 
   public async loadUser() {
     if (!this.userLogin) {
-      console.log(this.userLogin);
       let response = await this.user();
       let userLogResponse = response as ApiResponse<{
         user: User
@@ -30,7 +30,13 @@ export class AuthService {
   }
 
   public async login(dto: UserAuthDto) {
-    return this.apiService.post(`${environment.backend.apiV1Host}/auth/login`, dto, environment.backend.optionsApi.cookies);
+    return this.apiService.post(`${environment.backend.apiV1Host}/auth/login`, dto, {
+      headers: {
+        Accept: 'application/json',
+        'X-XSRF-TOKEN': CookieService.getCookie('XSRF-TOKEN') ?? '',
+      },
+      withCredentials: true
+    });
   }
 
   public async register(dto: UserDto) {
@@ -39,10 +45,8 @@ export class AuthService {
 
   public async user() {
     try {
-      console.log('va func user');
       return this.apiService.get(`${environment.backend.apiV1Host}/auth/user`, environment.backend.optionsApi.cookies);
     } catch (error) {
-      console.log('va error func user');
       this.userLogin = null;
       return null;
     }

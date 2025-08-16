@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserTypeEnum } from '../../../enums/user-type';
-import { UserTypeEnumPipe } from '../../../pipes/user-type-enum.pipe';
 import { AlertComponent } from '../../../components/alert/alert.component';
 import { Validator } from '../../../classes/validator';
 
@@ -13,7 +11,7 @@ import { Validator } from '../../../classes/validator';
   imports: [
     ReactiveFormsModule, RouterLink,
     AlertComponent,
-    UserTypeEnumPipe
+    // UserTypeEnumPipe
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -21,33 +19,35 @@ import { Validator } from '../../../classes/validator';
 export class RegisterComponent implements OnInit {
 
   protected frm: FormGroup = new FormGroup({});
-  protected typeEnum: any;
+  // protected typeEnum: any;
   private file: File | null = null;
 
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     this.createForm();
-    this.loadEnums();
+    // this.loadEnums();
   }
 
   private createForm() {
     this.frm = this.fb.group({
-      'email': ['natalia@mail.com', [Validators.required, Validators.email]],
-      'password': ['12345678', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-      'password_confirmation': ['12345678', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-      'first_name': ['Natalia', [Validators.required, Validators.minLength(3), Validators.pattern("[a-zA-Z ]*")]],
-      'last_name': ['Mendez', [Validators.required, Validators.minLength(3), Validators.pattern("[a-zA-Z ]*")]],
-      'type': [UserTypeEnum.INDIVIDUAL, [Validators.required]],
+      'email': ['', [Validators.required, Validators.email]],
+      'password': ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+      'password_confirmation': ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validator.equals('password', 'contraseña')]],
+      'first_name': ['', [Validators.required, Validators.minLength(3), Validators.pattern("[a-zA-Z ]*")]],
+      'last_name': ['', [Validators.required, Validators.minLength(3), Validators.pattern("[a-zA-Z ]*")]],
+      // 'type': [UserTypeEnum.INDIVIDUAL, [Validators.required]],
     });
   }
 
   ngOnInit() {
-    this.getControl('password_confirmation')?.addValidators(Validator.equals(this.frm.get('password')?.value, 'contraseña'));
+    this.getControl('password')?.valueChanges.subscribe(() => {
+      this.getControl('password_confirmation')?.updateValueAndValidity({ onlySelf: true });
+    });
   }
 
-  private loadEnums() {
-    this.typeEnum = Object.values(UserTypeEnum);
-    this.typeEnum.pop();
-  }
+  // private loadEnums() {
+  //   this.typeEnum = Object.values(UserTypeEnum);
+  //   this.typeEnum.pop();
+  // }
 
   protected onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit {
     formData.append('password_confirmation', this.getControl('password_confirmation')?.value);
     formData.append('first_name', this.getControl('first_name')?.value);
     formData.append('last_name', this.getControl('last_name')?.value);
-    formData.append('type', this.getControl('type')?.value);
+    // formData.append('type', this.getControl('type')?.value);
     if (this.file) {
       formData.append('image', this.file);
     }

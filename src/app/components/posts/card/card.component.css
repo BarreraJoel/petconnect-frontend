@@ -1,4 +1,4 @@
-.card {
+/* .card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -9,4 +9,28 @@
 
 .object-fit-cover {
   object-fit: cover;
+} */
+
+@import "../../../../../public/assets/css/buttons.css";
+
+.card {
+  background-color: #fff;
+}
+
+.card img {
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.rounded-top-4 {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.img-fixed {
+  height: 180px;        /* altura fija */
+  object-fit: cover;    /* recorta sin deformar */
 }

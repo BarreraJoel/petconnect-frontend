@@ -8,7 +8,7 @@ export const userLoggedGuard: CanActivateFn = async (route, state) => {
   let router: Router = inject(Router);
 
   try {
-    await authService.loadUser();
+    // await authService.loadUser();
     return true;
   } catch (error) {
     router.navigateByUrl('auth/sign-in');

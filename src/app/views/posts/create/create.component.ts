@@ -8,20 +8,23 @@ import { PostTypeEnumPipe } from '../../../pipes/post-type-enum.pipe';
 import { ApiGeoService } from '../../../services/api-geo.service';
 import { ApiResponse } from '../../../interfaces/api-response';
 import { User } from '../../../models/user/user';
+import { AlertComponent } from '../../../components/alert/alert.component';
+import { Validator } from '../../../classes/validator';
 
 @Component({
   selector: 'app-create',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    PostTypeEnumPipe
+    PostTypeEnumPipe,
+    AlertComponent
   ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
 })
 export class CreateComponent implements OnInit {
 
-  protected frm: FormGroup;
+  protected frm: FormGroup = new FormGroup({});
   protected typeEnum: any;
   private files: File[] = [];
   protected provinces: any[] | null = null;
@@ -34,29 +37,41 @@ export class CreateComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder
   ) {
+    this.loadEnums();
+    this.createForm();
+  }
+
+  private createForm() {
     this.frm = this.fb.group({
-      'title': ['ADOPCION', Validators.required],
-      'city': ['CABA', Validators.required],
-      'locality': ['Barracas', Validators.required],
-      'description': ['Perrito adopcion', Validators.required],
+      'title': ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
+      'city': ['', Validators.required],
+      'locality': ['', Validators.required],
+      'description': ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
       'type': [PostTypeEnum.ADOPT, Validators.required],
       'user_id': ['', Validators.required],
       'images': [null],
     });
 
-    this.typeEnum = Object.values(PostTypeEnum);
   }
+
+  private loadEnums() {
+    this.typeEnum = Object.values(PostTypeEnum);
+    this.typeEnum.pop();
+  }
+
   async ngOnInit() {
     // await this.loadGeo();
   }
 
-  // private async loadGeo() {
-  //   const response = await this.apiGeoService.getCities();
-  //   console.log(response);
-  //   this.provinces = (response as any).provincias;
-  //   this.frm.get('city')?.setValue(this.provinces ? this.provinces[0].nombre : '');
-  //   await this.loadLocalities();
-  // }
+  private async loadGeo() {
+    console.log(this.provinces);
+
+    const response = await this.apiGeoService.getCities();
+    console.log(response);
+    // this.provinces = (response as any).provincias;
+    // this.frm.get('city')?.setValue(this.provinces ? this.provinces[0].nombre : '');
+    // await this.loadLocalities();
+  }
 
   protected async loadLocalities() {
     const response = await this.apiGeoService.getLocalities(this.frm.get('city')?.value);
@@ -98,6 +113,29 @@ export class CreateComponent implements OnInit {
 
       this.router.navigateByUrl('posts');
     }
+  }
+
+  private getControl(controlName: string) {
+    return this.frm.get(controlName);
+  }
+
+  protected verifyControlErrors(controlName: string) {
+    let hasErrors: boolean = false;
+    const control = this.getControl(controlName);
+
+    if (control?.errors) {
+      const errorKey = Object.keys(control.errors);
+      if (errorKey) {
+        hasErrors = errorKey.length > 0;
+      }
+    }
+
+    return hasErrors;
+  }
+
+  protected getErrorMessage(controlName: string): string {
+    const control = this.getControl(controlName);
+    return Validator.getErrorMessage(control);
   }
 
 }

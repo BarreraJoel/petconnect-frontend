@@ -93,12 +93,13 @@ export class Validator {
         };
     }
 
-    public static equals(string: string, fieldName: string): ValidatorFn {
+    public static equals(otherControlName: string, fieldName: string): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
-            // console.log(control.value);
-            // console.log(string);
-            
-            return control.value == string ? null : {
+
+            if (!control.parent) return null;
+            const otherControl = control.parent.get(otherControlName);
+
+            return control.value == otherControl?.value ? null : {
                 equals: {
                     field: fieldName
                 }

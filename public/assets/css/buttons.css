@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-soft-blue {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.btn-soft-blue:hover {
+    background-color: #bfdbfe;
+}
+
+.btn-soft-green {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.btn-soft-green:hover {
+    background-color: #a7f3d0;
+}
+
+.btn-soft-orange {
+    background-color: #ffedd5;
+    color: #9a3412;
+}
+
+.btn-soft-orange:hover {
+    background-color: #fed7aa;
+}
+
+.btn-soft-red {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.btn-soft-red:hover {
+    background-color: #fecaca;
+}
+
+.btn-soft-purple {
+    background-color: #ede9fe;
+    color: #5b21b6;
+}
+
+.btn-soft-purple:hover {
+    background-color: #ddd6fe;
+}
+
+/* Negro suave */
+.btn-soft-black {
+    background-color: #e5e7eb; /* gris muy claro */
+    color: #1f2937; /* gris oscuro */
+}
+.btn-soft-black:hover {
+    background-color: #d1d5db;
+}
+
+/* Blanco suave */
+.btn-soft-white {
+    background-color: #f9fafb; /* casi blanco */
+    color: #374151; /* gris medio */
+    border: 1px solid #e5e7eb;
+}
+.btn-soft-white:hover {
+    background-color: #f3f4f6;
+}
+
+/* Blanco y negro */
+.btn-black {
+    background-color: #000000;
+    color: #ffffff;
+}
+.btn-black:hover {
+    background-color: #1a1a1a;
+}
+
+.btn-white {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ccc;
+}
+.btn-white:hover {
+    background-color: #f2f2f2;
+}
+
+/* Neutros */
+.btn-soft-gray {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+.btn-soft-gray:hover {
+    background-color: #e5e7eb;
+}
+
+.btn-soft-dark {
+    background-color: #374151;
+    color: #f9fafb;
+}
+.btn-soft-dark:hover {
+    background-color: #1f2937;
+}
+
+/* Tonos fríos extra */
+.btn-soft-teal {
+    background-color: #ccfbf1;
+    color: #115e59;
+}
+.btn-soft-teal:hover {
+    background-color: #99f6e4;
+}
+
+.btn-soft-navy {
+    background-color: #e0e7ff;
+    color: #1e3a8a;
+}
+.btn-soft-navy:hover {
+    background-color: #c7d2fe;
+}
+
+/* Tonos cálidos extra */
+.btn-soft-pink {
+    background-color: #ffe4e6;
+    color: #9d174d;
+}
+.btn-soft-pink:hover {
+    background-color: #fecdd3;
+}
+
+.btn-soft-yellow {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+.btn-soft-yellow:hover {
+    background-color: #fef08a;
+}
