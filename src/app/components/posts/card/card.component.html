@@ -11,28 +11,28 @@
 
     <div class="card-body">
 
-        <!-- Avatar + Nombre + Fecha -->
         <div class="d-flex align-items-center mb-3">
-          <img [src]="userPost.image_url ? getImagePath(userPost.image_url) : 'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png'" class="rounded-circle me-2" width="40" height="40" alt="avatar">
+          <div class="profile-pic rounded-circle me-2">
+            @if(userPost.image_url) {
+              <img [src]="getImagePath(userPost.image_url)" alt="avatar">
+            }
+            @else {
+              <span>{{userPost.first_name[0]}}{{userPost.last_name[0]}}</span>
+            }
+          </div>
           <div>
             <div class="fw-semibold">{{userPost.first_name}} {{userPost.last_name}}</div>
-            <small class="text-muted">Publicado {{post.created_at|timeAgo}}</small>
+            <small class="text-muted">{{post.created_at|timeAgo}}</small>
           </div>
         </div>
 
-        <!-- Título + Descripción -->
-        <h5 class="card-title fw-bold">{{post.title|truncate:20|uppercase}}</h5>
+        <small>{{post.city}}, {{post.locality}}</small>
+        <h5 class="card-title fw-bold">{{post.title|truncate:15|uppercase}}</h5>
         <p class="card-text text-muted">{{post.description|truncate:30}}</p>
 
-        <!-- Botón -->
         <button class="btn btn-soft-teal" (click)="detail(post.uuid)">
           Leer más <span class="material-icons">keyboard_arrow_right</span> 
         </button>
-        <!-- <span class="material-symbols-outlined">
-keyboard_double_arrow_right
-</span> -->
-
-        <!-- <button class="btn btn-success rounded-pill">Leer más</button> -->
       </div>
     </div>
 }

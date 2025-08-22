@@ -1,0 +1,15 @@
+.profile-tabs .nav-tabs {
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.profile-tabs .nav-link {
+  border: none;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.profile-tabs .nav-link.active {
+  color: #198754;
+  border-bottom: 3px solid #198754;
+  background-color: transparent;
+}

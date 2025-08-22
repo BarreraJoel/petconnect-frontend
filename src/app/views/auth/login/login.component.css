@@ -1,19 +1,34 @@
-.login-page {
+.login-container {
+  display: flex;
   min-height: 100vh;
-  /* verde de fondo */
-  /* background-color: #a8c8a5;  */
-}
-
-.login-card {
-  background-color: #f7f4ef; /* color crema */
-  max-width: 1000px;
-  width: 90%;
 }
 
 .form-section {
-  background-color: white;
+  flex: 1;
+  background-color: #fff;
+}
+
+.form-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .image-section {
+  flex: 1;
   background-color: #f7f4ef;
+}
+
+.illustration {
+  max-width: 70%;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .image-section {
+    order: -1;
+    padding: 2rem 0;
+  }
 }

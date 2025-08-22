@@ -3,19 +3,24 @@ import { userLoggedGuard } from './guards/user-logged.guard';
 
 export const routes: Routes = [
     {
+        path: 'auth',
+        loadChildren: () => import('./routes/auth.routes').then(r => r.routes),
+    },
+    {
         path: 'posts',
         loadChildren: () => import('./routes/posts.routes').then(r => r.routes),
         canActivate: [userLoggedGuard]
     },
     {
-        path: 'auth',
-        loadChildren: () => import('./routes/auth.routes').then(r => r.routes),
-    },
-    {
-        path: 'profile/:uuid',
-        loadComponent: () => import('./views/users/detail/detail.component').then(c => c.DetailComponent),
+        path: 'accounts',
+        loadChildren: () => import('./routes/accounts.routes').then(r => r.routes),
         canActivate: [userLoggedGuard]
     },
+    // {
+    //     path: 'my-account',
+    //     loadChildren: () => import('./routes/accounts.routes').then(r => r.routes),
+    //     canActivate: [userLoggedGuard]
+    // },
     {
         path: '**',
         redirectTo: 'posts',

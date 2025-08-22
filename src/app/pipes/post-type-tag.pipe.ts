@@ -12,7 +12,7 @@ export class PostTypeTagPipe implements PipeTransform {
     switch (value) {
       case PostTypeEnum.ADOPT:
         // return "warn";
-        return 'bg-primary';
+        return 'bg-info';
         break;
       case PostTypeEnum.LOST:
         // return 'danger';

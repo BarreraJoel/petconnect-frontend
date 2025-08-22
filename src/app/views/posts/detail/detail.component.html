@@ -1,79 +1,45 @@
 <navbar />
 
-@if (post) {
-  <div class="container my-4">
-    <div class="row bg-light rounded shadow-sm overflow-hidden" style="background-color: #b4937e;">
-      
-        <!-- Sección de imágenes -->
-        <div class="col-md-5 p-3">
+@if (post && userPost) {
+<div class="post-container">
+    <div class="d-flex">
+        <div class="post-image">
             @if(images) {
-                <p-galleria
-                    [value]="images"
-                    [numVisible]="5"
-                    [circular]="true"
-                    [showItemNavigators]="true"
-                    [showThumbnails]="false"
-                    [containerStyle]="{ 'max-width': '100%' }" >
-                    <ng-template pTemplate="item" let-item>
-                        <div class="galleria-img-wrapper">
-                            <img [src]="item.itemImageSrc" />
-                        </div>
-                    </ng-template>
-                </p-galleria>
+            <p-galleria [value]="images" [circular]="true" [showItemNavigators]="true"
+                [showItemNavigatorsOnHover]="true" [showIndicators]="true" [showIndicatorsOnItem]="true"
+                [changeItemOnIndicatorHover]="true" [showThumbnails]="false"
+                [containerStyle]="{ 'max-width': '100%', 'border': 'none' }">
+                <ng-template pTemplate="item" let-item>
+                    <div class="galleria-img-wrapper">
+                        <img [src]="item.itemImageSrc" />
+                    </div>
+                </ng-template>
+            </p-galleria>
+            }
+            @else {
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
+                alt="Post image">
             }
         </div>
-
-        <!-- Sección de datos -->
-        <div class="col-md-7 d-flex flex-column justify-content-between p-4 text-dark">
-            <div>
-                <h4 class="fw-bold inter-semibold">{{ post.title }}</h4>
-                <p class="inter-regular">{{ post.description }}</p>
-
-                @if (userPost) {
-                    <div class="d-flex align-items-center my-3">
-                        @if (userPost.image_url) {
-                            <p-avatar
-                            [image]="userPost.image_url ? getImage(userPost.image_url) : 'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png'"
-                            class="me-2"
-                            size="large"
-                            shape="circle"
-                            />
-                        }
-                        @else {
-                            <p-avatar
-                            styleClass="me-2"
-                            [style]="{ 'background-color': '#307475', color: '#e8eded' }"
-                            shape="circle"
-                            icon="pi pi-user"
-                            />
-                        }
-                        <p class="mb-0 lato-medium pointer" (click)="redirectUserProfile()">{{ userPost.first_name + " " + userPost.last_name }}</p>
-                    </div>
-                }
-
-                <div class="mb-2">
-                    <small class="d-block lato-regular"><i class="pi pi-map-marker me-1"></i>{{ post.city }}, {{ post.locality }}</small>
-                    <small class="inter-light"><i class="pi pi-clock me-1"></i>{{ post.created_at | timeAgo }}</small>
-                </div>
+        <div class="post-details">
+            <div class="h-75">
+                <h2 class="post-title">{{ post.title | uppercase }}</h2>
+                <p class="post-meta">Publicado por <span>{{userPost.first_name}} {{userPost.last_name}}</span> • {{
+                    post.created_at | timeAgo }}</p>
+                <p class="post-description">
+                    {{ post.description }}
+                </p>
+                <span class="material-icons">location_on</span> {{ post.city }}, {{ post.locality }}
             </div>
-
-            <!-- Acciones -->
-            <div class="mt-3 d-flex justify-content-end gap-2">
-                <!-- <p-button label="Reportar" icon="pi pi-flag" severity="warn" /> -->
-                <!-- <p-button label="Actualizar" icon="pi pi-pencil" (click)="update(post.uuid)" />
-                <p-button label="Eliminar" icon="pi pi-times" severity="danger" (click)="delete(post.uuid)" /> -->
-                <button class="btn btn-soft-yellow" (click)="update(post.uuid)">
-                    <span class="material-icons">edit</span> Actualizar
+            <div class="post-actions d-flex">
+                <button class="btn btn-soft-teal" [routerLink]="['/accounts', userPost.uuid]" routerLinkActive="router-link-active">
+                    Ver perfil <span class="material-icons">arrow_forward</span>
                 </button>
-                <button class="btn btn-soft-red" (click)="delete(post.uuid)">
-                    <span class="material-icons">delete</span> Eliminar
-                </button>
-
             </div>
         </div>
     </div>
-  </div>
+</div>
 }
 @else {
-    <skeleton />
+<skeleton />
 }

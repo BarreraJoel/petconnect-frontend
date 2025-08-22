@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { UserService } from '../../../services/users/user.service';
 import { FormsModule } from '@angular/forms';
 import { AvatarModule } from 'primeng/avatar';
@@ -9,16 +9,18 @@ import { ApiResponse } from '../../../interfaces/api-response';
 import { StorageService } from '../../../services/storage/storage.service';
 import { SkeletonComponent } from '../../../components/skeleton/skeleton.component';
 import { PostService } from '../../../services/posts/post.service';
-import { PaginateService } from '../../../services/paginate.service';
 import { ListComponent } from '../../../components/posts/list/list.component';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
+import { PostListTableComponent } from '../../../components/table/post-list-table/post-list-table.component';
+import { ModalComponent } from '../../../components/modal/modal.component';
+import { TabComponent } from '../../../components/tab/tab.component';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
   imports: [
-    FormsModule,
-    SkeletonComponent, ListComponent, NavbarComponent,
+    FormsModule, RouterOutlet, TabComponent,
+    SkeletonComponent, NavbarComponent, PostListTableComponent, ModalComponent, ListComponent,
     AvatarModule, ButtonModule,
   ],
   templateUrl: './detail.component.html',
@@ -36,7 +38,6 @@ export class DetailComponent implements OnInit {
     private userService: UserService,
     private storageService: StorageService,
     private postService: PostService,
-    private paginateService: PaginateService,
   ) {
     let uuid = this.actRoute.snapshot.paramMap.get('uuid');
     this.userUuid = <string>uuid;

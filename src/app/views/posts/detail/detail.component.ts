@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PostService } from '../../../services/posts/post.service';
 import { GalleriaModule } from 'primeng/galleria';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +18,8 @@ import { NavbarComponent } from '../../../components/navbar/navbar.component';
   selector: 'app-detail',
   standalone: true,
   imports: [
-    FormsModule, SkeletonComponent, NavbarComponent,
+    FormsModule, RouterLink,
+    SkeletonComponent, NavbarComponent,
     GalleriaModule, AvatarModule, ButtonModule,
     TimeAgoPipe
   ],

@@ -10,6 +10,7 @@ import { ApiResponse } from '../../../interfaces/api-response';
 import { User } from '../../../models/user/user';
 import { AlertComponent } from '../../../components/alert/alert.component';
 import { Validator } from '../../../classes/validator';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-create',
@@ -17,7 +18,7 @@ import { Validator } from '../../../classes/validator';
   imports: [
     ReactiveFormsModule,
     PostTypeEnumPipe,
-    AlertComponent
+    AlertComponent, NavbarComponent
   ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
@@ -90,12 +91,8 @@ export class CreateComponent implements OnInit {
   }
 
   protected async publish() {
-    let userResponse = await this.authService.user();
-    if (userResponse) {
-      let apiResponse = (userResponse as ApiResponse<{
-        user: User
-      }>);
-      this.frm.get('user_id')?.setValue(apiResponse.data?.user.uuid);
+    if (this.authService.userLogin) {      
+      this.frm.get('user_id')?.setValue(this.authService.userLogin.uuid);
 
       const formData = new FormData();
       formData.append('title', this.frm.get('title')?.value);

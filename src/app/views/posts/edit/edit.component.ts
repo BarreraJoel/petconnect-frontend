@@ -5,11 +5,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PostTypeEnum } from '../../../enums/post-type';
 import { ApiResponse } from '../../../interfaces/api-response';
 import { Post } from '../../../models/post/post';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    NavbarComponent
+  ],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css'
 })

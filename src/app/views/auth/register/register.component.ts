@@ -4,14 +4,14 @@ import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AlertComponent } from '../../../components/alert/alert.component';
 import { Validator } from '../../../classes/validator';
+import { NavbarAuthComponent } from '../../../components/navbar/navbar-auth/navbar-auth.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
     ReactiveFormsModule, RouterLink,
-    AlertComponent,
-    // UserTypeEnumPipe
+    AlertComponent, NavbarAuthComponent
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'

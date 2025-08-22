@@ -1,0 +1,42 @@
+@if(postsPaginate) {
+  <div class="container mt-4">
+    <h2 class="mb-3">Publicaciones</h2>
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Tipo</th>
+          <th>Título</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (post of postsPaginate.data; track $index) {
+          <tr>
+            <td>{{ post.created_at|date:"dd-MM-Y" }}</td>
+            <td>{{ post.type|postTypeEnum}}</td>
+            <td>{{ post.title|truncate:20 }}</td>
+            <td><span class="status active">{{ post.is_approved }}</span></td>
+            <td class="d-flex justify-content-around">
+              <button class="btn btn-soft-green" [routerLink]="['/posts/', post.uuid]" routerLinkActive="router-link-active">
+                <span class="material-icons">visibility</span>
+              </button>
+              <button class="btn btn-soft-blue" [routerLink]="['/posts/edit', post.uuid]" routerLinkActive="router-link-active">
+                <span class="material-icons">edit</span>
+              </button>
+              <button class="btn btn-soft-red">
+                <span class="material-icons">delete</span>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div class="card flex justify-content-center mt-4">
+    <p-paginator (onPageChange)="onPageChange($event)" showFirstLastIcon="false" [first]="postsPaginate.from"
+        [rows]="postsPaginate.per_page" [totalRecords]="postsPaginate.total" />
+    </div>
+
+  </div>
+}
