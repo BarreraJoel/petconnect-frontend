@@ -7,5 +7,9 @@ export interface User {
     email: string,
     password: string,
     image_url: string | null,
-    type: UserTypeEnum,
+    instagram_url: string | null,
+    facebook_url: string | null,
+    twitter_url: string | null,
+    linkedin_url: string | null,
+    // type: UserTypeEnum,
 }

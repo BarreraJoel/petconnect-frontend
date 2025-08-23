@@ -16,11 +16,6 @@ export const routes: Routes = [
         loadChildren: () => import('./routes/accounts.routes').then(r => r.routes),
         canActivate: [userLoggedGuard]
     },
-    // {
-    //     path: 'my-account',
-    //     loadChildren: () => import('./routes/accounts.routes').then(r => r.routes),
-    //     canActivate: [userLoggedGuard]
-    // },
     {
         path: '**',
         redirectTo: 'posts',

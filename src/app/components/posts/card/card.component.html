@@ -3,7 +3,8 @@
   <div class="card shadow-sm border-0 rounded-4">
 
     <div class="position-relative">
-      <img [src]="post.images_url ? getImagePath(post.images_url[0]): 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'" class="card-img-top rounded-top-4 img-fixed" alt="...">
+      <!-- <img src="../../../../../public/assets/img/no_image.png" alt=""> -->
+      <img [src]="post.images_url ? getImagePath(post.images_url[0]): 'assets/img/no_image.png'" class="card-img-top rounded-top-4 img-fixed" alt="...">
       <span class="badge position-absolute top-0 start-0 m-2 px-3 py-2 rounded-pill shadow" [class]="post.type|postTypeTag">
         {{ post.type|postTypeEnum }}
       </span>
@@ -30,7 +31,7 @@
         <h5 class="card-title fw-bold">{{post.title|truncate:15|uppercase}}</h5>
         <p class="card-text text-muted">{{post.description|truncate:30}}</p>
 
-        <button class="btn btn-soft-teal" (click)="detail(post.uuid)">
+        <button class="btn soft-teal" (click)="detail(post.uuid)">
           Leer más <span class="material-icons">keyboard_arrow_right</span> 
         </button>
       </div>

@@ -1,5 +1,7 @@
 <navbar />
 
+<loader [isLoading]="postsPaginate == null"/>
+
 @if(postsPaginate) {
   <div class="container my-4">
 
@@ -8,7 +10,4 @@
     </div>
     
   </div>
-}
-@else {
-  <skeleton />
 }

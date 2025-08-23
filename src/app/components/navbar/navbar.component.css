@@ -1,4 +1,5 @@
-@import "../../../../public/assets/css/buttons.css";
+@import "../../../../public/assets/css/buttons/buttons.css";
+@import "../../../../public/assets/css/buttons/button-colors.css";
 
 .navbar {
   background-color: #fdfbf6; /* crema muy suave */

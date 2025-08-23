@@ -2,7 +2,7 @@
     <div class="container my-4">
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
             <div class="flex-grow-1">
-                <p class="mb-0 fs-5 fw-semibold">{{ postsPaginate.total }} resultados</p>
+                <p class="mb-0 fs-5 fw-semibold">Mostrando {{ postsPaginate.total }} resultados</p>
             </div>
 
             <div class="d-flex align-items-center gap-3">
@@ -10,10 +10,11 @@
                     <p-select [options]="sortOptions" [(ngModel)]="selectedOption" optionLabel="name"
                         placeholder="Ordenar por..." class="w-full md:w-56" />
                 </div>
-
-                <button class="btn btn-soft-blue" (click)="redirect('posts/create')">
-                    <span class="material-icons">add</span> Publicar
-                </button>
+                @if(isAuthenticated) {
+                    <button class="btn soft-blue" (click)="redirect('posts/create')">
+                        <span class="material-icons">add</span> Publicar
+                    </button>
+                }
             </div>
         </div>
 
@@ -26,8 +27,7 @@
         </div>
 
         <div class="card flex justify-content-center mt-4">
-            <p-paginator (onPageChange)="onPageChange($event)" showFirstLastIcon="false" [first]="postsPaginate.from"
-                [rows]="postsPaginate.per_page" [totalRecords]="postsPaginate.total" />
+            <p-paginator (onPageChange)="onPageChange($event)" showFirstLastIcon="false" [first]="postsPaginate.from" [rows]="postsPaginate.per_page" [totalRecords]="postsPaginate.total" />
         </div>
     </div>
 }

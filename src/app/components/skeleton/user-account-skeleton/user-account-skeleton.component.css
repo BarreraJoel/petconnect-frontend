@@ -1,0 +1,80 @@
+.profile-container {
+  width: 100%;
+  background: #fff;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  font-family: sans-serif;
+}
+
+.cover {
+  height: 180px;
+  width: 100%;
+  border-radius: 0 0 16px 16px;
+}
+
+.profile-pic {
+  position: absolute;
+  top: 50%; /* centro vertical del cover */
+  left: 50%; /* centro horizontal */
+  transform: translate(-50%, -50%); /* corrige posición para que quede centrado exacto */
+  border-radius: 50%;
+  border: 4px solid white;
+  width: 120px;
+  height: 120px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.info {
+  margin-top: 100px; /* ajusta según el tamaño del avatar */
+  padding: 16px;
+  text-align: center;
+}
+
+.info h2 {
+  height: 24px;
+  width: 150px;
+  margin: 8px auto 12px;
+  border-radius: 8px;
+}
+
+.social-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.pill {
+  width: 80px;
+  height: 24px;
+  border-radius: 999px;
+}
+
+/* Skeleton shimmer effect */
+.skeleton .shimmer {
+  position: relative;
+  overflow: hidden;
+  background: #e0e0e0;
+}
+
+.skeleton .shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150px;
+  height: 100%;
+  width: 150px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

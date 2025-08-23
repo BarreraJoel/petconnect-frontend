@@ -12,6 +12,7 @@ import { Post } from '../../../models/post/post';
 import { SkeletonComponent } from '../../../components/skeleton/skeleton.component';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { ListComponent } from '../../../components/posts/list/list.component';
+import { LoaderComponent } from '../../../components/animations/loader/loader.component';
 
 interface Option {
   name: string;
@@ -22,8 +23,8 @@ interface Option {
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CardComponent, SkeletonComponent, ListComponent,
-    ButtonModule, Select, PaginatorModule,
+    ListComponent, LoaderComponent,
+    ButtonModule, PaginatorModule,
     FormsModule, NavbarComponent
   ],
   templateUrl: './dashboard.component.html',

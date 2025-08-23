@@ -11,19 +11,16 @@ export class PostTypeTagPipe implements PipeTransform {
   transform(value: unknown, ...args: unknown[]) {
     switch (value) {
       case PostTypeEnum.ADOPT:
-        // return "warn";
-        return 'bg-info';
+        return 'soft-yellow';
         break;
       case PostTypeEnum.LOST:
-        // return 'danger';
-        return 'bg-warning'
+        return 'soft-red'
         break;
       case PostTypeEnum.FOUND:
-        // return 'success';
-        return 'bg-success';
+        return 'soft-green';
         break;
       default:
-        return 'bg-danger';
+        return 'soft-red';
         break;
     }
   }

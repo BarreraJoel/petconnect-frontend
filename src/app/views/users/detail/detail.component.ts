@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { UserService } from '../../../services/users/user.service';
 import { FormsModule } from '@angular/forms';
 import { AvatarModule } from 'primeng/avatar';
@@ -7,35 +7,36 @@ import { ButtonModule } from 'primeng/button';
 import { User } from '../../../models/user/user';
 import { ApiResponse } from '../../../interfaces/api-response';
 import { StorageService } from '../../../services/storage/storage.service';
-import { SkeletonComponent } from '../../../components/skeleton/skeleton.component';
 import { PostService } from '../../../services/posts/post.service';
 import { ListComponent } from '../../../components/posts/list/list.component';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
-import { PostListTableComponent } from '../../../components/table/post-list-table/post-list-table.component';
-import { ModalComponent } from '../../../components/modal/modal.component';
 import { TabComponent } from '../../../components/tab/tab.component';
+import { UserAccountSkeletonComponent } from '../../../components/skeleton/user-account-skeleton/user-account-skeleton.component';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
   imports: [
-    FormsModule, RouterOutlet, TabComponent,
-    SkeletonComponent, NavbarComponent, PostListTableComponent, ModalComponent, ListComponent,
+    FormsModule, TabComponent,
+    NavbarComponent, ListComponent, UserAccountSkeletonComponent,
     AvatarModule, ButtonModule,
-  ],
+    RouterLink
+],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'
 })
 export class DetailComponent implements OnInit {
 
   protected user: User | null = null;
-  private userUuid: string;
+  protected userUuid: string;
   protected postsPaginate: any | null = null;
 
   constructor(
     private router: Router,
     private actRoute: ActivatedRoute,
     private userService: UserService,
+    protected authService: AuthService,
     private storageService: StorageService,
     private postService: PostService,
   ) {
@@ -44,6 +45,9 @@ export class DetailComponent implements OnInit {
   }
 
   async ngOnInit() {
+    if (!this.authService.userLogin) {
+      await this.authService.loadUser();
+    }
     await this.loadPosts();
     await this.loadUser();
   }

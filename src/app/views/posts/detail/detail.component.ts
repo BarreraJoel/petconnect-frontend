@@ -11,15 +11,16 @@ import { TimeAgoPipe } from '../../../pipes/time-ago.pipe';
 import { ApiResponse } from '../../../interfaces/api-response';
 import { Post } from '../../../models/post/post';
 import { User } from '../../../models/user/user';
-import { SkeletonComponent } from '../../../components/skeleton/skeleton.component';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
+import { PostDetailSkeletonComponent } from '../../../components/skeleton/post-detail-skeleton/post-detail-skeleton.component';
+import { LoaderComponent } from '../../../components/animations/loader/loader.component';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
   imports: [
     FormsModule, RouterLink,
-    SkeletonComponent, NavbarComponent,
+    NavbarComponent, PostDetailSkeletonComponent,LoaderComponent,
     GalleriaModule, AvatarModule, ButtonModule,
     TimeAgoPipe
   ],

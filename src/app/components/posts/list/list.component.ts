@@ -39,11 +39,16 @@ export class ListComponent {
   } | undefined;
 
   @Input() postsPaginate: any | null = null;
+  @Input() isAuthenticated: boolean = false;
 
   constructor(
     private router: Router,
     private paginateService: PaginateService,
   ) { }
+
+  ngOnInit() {
+    console.log(this.postsPaginate);
+  }
 
   protected async onPageChange(event: any) {
     for (const link of this.postsPaginate.links) {

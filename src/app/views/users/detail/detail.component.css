@@ -1,4 +1,5 @@
-@import "../../../../../public/assets/css/buttons.css";
+@import "../../../../../public/assets/css/buttons/buttons.css";
+@import "../../../../../public/assets/css/buttons/button-colors.css";
 
 .profile-container {
   width: 100%;
@@ -12,7 +13,7 @@
 
 .cover {
   height: 180px;
-  background: url('https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-light-pastel-geometric-banner-background-bluegeometrygraywhiteliterarysimple-image_83281.jpg') center/cover no-repeat;
+  background: url('../../../../../public/assets/img/background/back_6.jpg') center/cover no-repeat;
 }
 
 .avatar {
@@ -92,18 +93,26 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.4rem 0.8rem;
-  background: #e7edff;
-  color: #335c97;
   border-radius: 999px;
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.pill:hover {
-  background: #d0e3ff;
-}
-
 .material-icons {
   font-size: 1rem;
+}
+
+.top-right-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }

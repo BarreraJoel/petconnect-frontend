@@ -1,5 +1,7 @@
 <navbar />
 
+<loader [isLoading]="post == null"/>
+
 @if (post && userPost) {
 <div class="post-container">
     <div class="d-flex">
@@ -32,7 +34,7 @@
                 <span class="material-icons">location_on</span> {{ post.city }}, {{ post.locality }}
             </div>
             <div class="post-actions d-flex">
-                <button class="btn btn-soft-teal" [routerLink]="['/accounts', userPost.uuid]" routerLinkActive="router-link-active">
+                <button class="btn soft-teal" [routerLink]="['/accounts', userPost.uuid]" routerLinkActive="router-link-active">
                     Ver perfil <span class="material-icons">arrow_forward</span>
                 </button>
             </div>
@@ -41,5 +43,5 @@
 </div>
 }
 @else {
-<skeleton />
+    <post-detail-skeleton />
 }

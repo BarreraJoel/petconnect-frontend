@@ -1,0 +1,92 @@
+/* animación shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0;
+  }
+
+  100% {
+    background-position: 450px 0;
+  }
+}
+
+.skeleton-box {
+  background: #e0e0e0;
+  background-image: linear-gradient(90deg,
+      #e0e0e0 0px,
+      #f0f0f0 40px,
+      #e0e0e0 80px);
+  background-size: 600px 100%;
+  background-repeat: no-repeat;
+  display: inline-block;
+  border-radius: 8px;
+  animation: shimmer 1.6s infinite linear;
+}
+
+/* Layout igual al post-container */
+.post-container.skeleton {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  width: 90%;
+  margin: 20px auto;
+  min-height: 350px;
+}
+
+/* Imagen */
+.skeleton-img {
+  width: 500px;
+  height: 350px;
+  border-radius: 8px 0 0 8px;
+}
+
+/* Detalles */
+.post-details {
+  flex: 1;
+  padding: 20px;
+}
+
+.skeleton-title {
+  width: 60%;
+  height: 24px;
+  margin-bottom: 15px;
+}
+
+.skeleton-meta {
+  width: 40%;
+  height: 16px;
+  margin-bottom: 10px;
+}
+
+.skeleton-text {
+  width: 90%;
+  height: 14px;
+  margin-bottom: 8px;
+}
+
+.skeleton-text.short {
+  width: 70%;
+}
+
+.skeleton-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  background: #e0e0e0;
+  background-image: linear-gradient(90deg,
+      #e0e0e0 0px,
+      #f0f0f0 40px,
+      #e0e0e0 80px);
+  background-size: 600px 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+/* Botón */
+.skeleton-button {
+  width: 120px;
+  height: 36px;
+  border-radius: 20px;
+}

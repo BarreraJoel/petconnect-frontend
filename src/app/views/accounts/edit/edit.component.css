@@ -1,4 +1,7 @@
-.register-container {
+@import "../../../../../public/assets/css/buttons/buttons.css";
+@import "../../../../../public/assets/css/buttons/button-colors.css";
+
+.edit-container {
   display: flex;
   min-height: 100vh;
 }

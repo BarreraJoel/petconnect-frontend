@@ -1,14 +1,13 @@
-<!-- <navbar-auth /> -->
+<navbar />
 
-<div class="register-container">
+<div class="edit-container">
 
   <div class="form-section d-flex flex-column justify-content-center p-5">
 
     <div class="form-wrapper">
-      <h3 class="fw-bold mb-3">Crear una cuenta</h3>
-      <p class="text-muted">Por favor, cree una cuenta para empezar a utilizar la aplicación</p>
+      <h3 class="fw-bold mb-3">Editar perfil</h3>
 
-      <form >
+      <form [formGroup]="frm" (ngSubmit)="update()">
 
         <div class="mb-3">
           <label for="text" class="form-label">Nombre *</label>
@@ -39,28 +38,33 @@
           <alert [message]="getErrorMessage('password')" />
           } -->
         </div>
-        <div class="mb-3">
-          <label for="text" class="form-label">Confirme la contraseña *</label>
-          <input type="password" class="form-control" placeholder="Confirme la contraseña"
-            formControlName="password_confirmation">
-          <!-- @if(verifyControlErrors('password_confirmation')){
-          <alert [message]="getErrorMessage('password_confirmation')" />
-          } -->
+
+        <div class="input-group mb-3" style="max-width: 400px;">
+          <span class="input-group-text"><i class="fa-brands fa-instagram"></i> instagram.com/</span>
+          <input type="text" class="form-control" placeholder="usuario" formControlName="instagram_url">
         </div>
-        <div class="mb-3">
-          <label for="text" class="form-label">Foto de perfil (opcional)</label>
-          <!-- <input class="form-control" type="file" name="image" (change)="onFileChange($event)" /> -->
-          <input class="form-control" type="file" name="image" />
+        <div class="input-group mb-3" style="max-width: 400px;">
+          <span class="input-group-text"><i class="fa-brands fa-x-twitter"></i> twitter.com/</span>
+          <input type="text" class="form-control" placeholder="usuario" formControlName="twitter_url">
+        </div>
+        <div class="input-group mb-3" style="max-width: 400px;">
+          <span class="input-group-text"><i class="fa-brands fa-facebook"></i> facebook.com/</span>
+          <input type="text" class="form-control" placeholder="usuario" formControlName="facebook_url">
+        </div>
+        <div class="input-group mb-3" style="max-width: 400px;">
+          <span class="input-group-text"><i class="fa-brands fa-linkedin"></i> linkedin.com/in/</span>
+          <input type="text" class="form-control" placeholder="usuario" formControlName="linkedin_url">
+        </div>
+        
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn soft-red" (click)="back()">
+            <span class="material-icons">close</span> Cancelar
+          </button>
+          <button type="submit" class="btn soft-yellow" [disabled]="frm.invalid">
+            <span class="material-icons">cached</span> Actualizar
+          </button>
         </div>
 
-        <button type="submit" class="btn btn-success w-100 mb-3">
-          Crear cuenta
-        </button>
-
-        <p class="small text-center mt-4">
-          ¿Ya tenés una cuenta?
-          <a routerLink="/auth/sign-in" class="fw-bold text-decoration-none">Inicia sesión</a>
-        </p>
       </form>
     </div>
 

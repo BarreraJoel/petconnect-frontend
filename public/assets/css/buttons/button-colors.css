@@ -1,0 +1,147 @@
+/* blue */
+.soft-blue {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.soft-blue:hover {
+    background-color: #bfdbfe;
+}
+
+/* green */
+.soft-green {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.soft-green:hover {
+    background-color: #a7f3d0;
+}
+
+/* orange */
+.soft-orange {
+    background-color: #ffedd5;
+    color: #9a3412;
+}
+
+.soft-orange:hover {
+    background-color: #fed7aa;
+}
+
+/* red */
+.soft-red {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.soft-red:hover {
+    background-color: #fecaca;
+}
+
+/* purple */
+.soft-purple {
+    background-color: #ede9fe;
+    color: #5b21b6;
+}
+
+.soft-purple:hover {
+    background-color: #ddd6fe;
+}
+
+/* black */
+.soft-black {
+    background-color: #e5e7eb;
+    color: #1f2937;
+}
+
+.soft-black:hover {
+    background-color: #d1d5db;
+}
+
+.black {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.black:hover {
+    background-color: #1a1a1a;
+}
+
+.soft-dark {
+    background-color: #374151;
+    color: #f9fafb;
+}
+
+.soft-dark:hover {
+    background-color: #1f2937;
+}
+
+.soft-gray {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.soft-gray:hover {
+    background-color: #e5e7eb;
+}
+
+
+/* white */
+.soft-white {
+    background-color: #f9fafb;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+}
+
+.soft-white:hover {
+    background-color: #f3f4f6;
+}
+
+.white {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ccc;
+}
+
+.white:hover {
+    background-color: #f2f2f2;
+}
+
+/* neutral */
+.soft-teal {
+    background-color: #ccfbf1;
+    color: #115e59;
+}
+
+.soft-teal:hover {
+    background-color: #99f6e4;
+}
+
+.soft-navy {
+    background-color: #e0e7ff;
+    color: #1e3a8a;
+}
+
+.soft-navy:hover {
+    background-color: #c7d2fe;
+}
+
+/* pink */
+.soft-pink {
+    background-color: #ffe4e6;
+    color: #9d174d;
+}
+
+.soft-pink:hover {
+    background-color: #fecdd3;
+}
+
+/* yellow */
+.soft-yellow {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.soft-yellow:hover {
+    background-color: #fef08a;
+}

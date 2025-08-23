@@ -31,4 +31,8 @@ export class UserService {
   public async get(uuid: string) {
     return this.apiService.get(`${environment.backend.apiV1Host}/users/${uuid}`, environment.backend.optionsApi.cookies);
   }
+
+  public async update(uuid: string, dto: any) {
+    return this.apiService.put(`${environment.backend.apiV1Host}/users/${uuid}`, dto, environment.backend.optionsApi.cookies);
+  }
 }
