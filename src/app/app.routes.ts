@@ -12,7 +12,7 @@ export const routes: Routes = [
         canActivate: [userLoggedGuard]
     },
     {
-        path: 'accounts',
+        path: ':username',
         loadChildren: () => import('./routes/accounts.routes').then(r => r.routes),
         canActivate: [userLoggedGuard]
     },

@@ -2,7 +2,7 @@
     <div class="container my-4">
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
             <div class="flex-grow-1">
-                <p class="mb-0 fs-5 fw-semibold">Mostrando {{ postsPaginate.total }} resultados</p>
+                <p class="mb-0 fs-5 fw-semibold">Mostrando {{ postsPaginate.from }}-{{ postsPaginate.to }} de {{ postsPaginate.total }} resultados</p>
             </div>
 
             <div class="d-flex align-items-center gap-3">
@@ -11,7 +11,7 @@
                         placeholder="Ordenar por..." class="w-full md:w-56" />
                 </div>
                 @if(isAuthenticated) {
-                    <button class="btn soft-blue" (click)="redirect('posts/create')">
+                    <button class="btn soft-blue" (click)="redirect('posts/publish')">
                         <span class="material-icons">add</span> Publicar
                     </button>
                 }

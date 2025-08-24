@@ -26,7 +26,7 @@
         <div class="post-details">
             <div class="h-75">
                 <h2 class="post-title">{{ post.title | uppercase }}</h2>
-                <p class="post-meta">Publicado por <span>{{userPost.first_name}} {{userPost.last_name}}</span> • {{
+                <p class="post-meta">Publicado por <span>{{userPost.username}}</span> • {{
                     post.created_at | timeAgo }}</p>
                 <p class="post-description">
                     {{ post.description }}
@@ -34,7 +34,7 @@
                 <span class="material-icons">location_on</span> {{ post.city }}, {{ post.locality }}
             </div>
             <div class="post-actions d-flex">
-                <button class="btn soft-teal" [routerLink]="['/accounts', userPost.uuid]" routerLinkActive="router-link-active">
+                <button class="btn soft-teal" [routerLink]="['', userPost.username]" routerLinkActive="router-link-active">
                     Ver perfil <span class="material-icons">arrow_forward</span>
                 </button>
             </div>

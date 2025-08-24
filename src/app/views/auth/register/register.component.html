@@ -11,17 +11,10 @@
       <form [formGroup]="frm" (ngSubmit)="register()">
 
         <div class="mb-3">
-          <label for="text" class="form-label">Nombre *</label>
-          <input type="text" class="form-control" placeholder="Nombre" formControlName="first_name">
-          @if(verifyControlErrors('first_name')){
-          <alert [message]="getErrorMessage('first_name')" />
-          }
-        </div>
-        <div class="mb-3">
-          <label for="text" class="form-label">Apellido *</label>
-          <input type="text" class="form-control" placeholder="Apellido" formControlName="last_name">
-          @if(verifyControlErrors('last_name')){
-          <alert [message]="getErrorMessage('last_name')" />
+          <label for="text" class="form-label">Usuario *</label>
+          <input type="text" class="form-control" placeholder="Usuario" formControlName="username">
+          @if(verifyControlErrors('username')){
+          <alert [message]="getErrorMessage('username')" />
           }
         </div>
         <div class="mb-3">
@@ -31,7 +24,6 @@
           <alert [message]="getErrorMessage('email')" />
           }
         </div>
-        <!-- Password -->
         <div class="mb-3">
           <label for="text" class="form-label">Contraseña *</label>
           <input type="password" class="form-control" placeholder="Contraseña" formControlName="password">
@@ -52,13 +44,14 @@
           <input class="form-control" type="file" name="image" (change)="onFileChange($event)" />
         </div>
 
-        <button type="submit" class="btn btn-success w-100 mb-3" [disabled]="frm.invalid">
+        <button type="submit" class="btn soft-green w-100 mb-3" [disabled]="frm.invalid">
+          <span class="material-icons text-center">add</span>
           Crear cuenta
         </button>
 
         <p class="small text-center mt-4">
           ¿Ya tenés una cuenta?
-          <a routerLink="/auth/sign-in" class="fw-bold text-decoration-none">Inicia sesión</a>
+          <span routerLink="/auth/sign-in" id="sign-in-link" class="fw-bold text-decoration-none text-primary">Inicia sesión</span>
         </p>
       </form>
     </div>

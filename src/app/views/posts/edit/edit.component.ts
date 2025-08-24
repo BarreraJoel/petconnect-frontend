@@ -20,7 +20,7 @@ import { NavbarComponent } from '../../../components/navbar/navbar.component';
 export class EditComponent implements OnInit {
 
   protected frm: FormGroup;
-  protected postUuid: string = "";
+  protected slug: string = "";
   protected typeEnum: any[];
 
   constructor(
@@ -30,8 +30,8 @@ export class EditComponent implements OnInit {
     private fb: FormBuilder
   ) {
 
-    let uuid = this.actRoute.snapshot.paramMap.get('uuid');
-    this.postUuid = <string>uuid;
+    let slug = this.actRoute.snapshot.paramMap.get('slug');
+    this.slug = <string>slug;
 
     this.frm = this.fb.group({
       'title': [''],
@@ -46,13 +46,15 @@ export class EditComponent implements OnInit {
   }
 
   async ngOnInit() {
-    let response = await this.postService.get(this.postUuid);
+    let response = await this.postService.get(this.slug);
     let postResponse = response as ApiResponse<{
       post: Post
     }>;
 
     if (postResponse && postResponse.data) {
-      this.frm.get('user_id')?.setValue(postResponse.data.post.user_id);
+      console.log();
+      
+      this.frm.get('user_id')?.setValue(postResponse.data.post.user_uuid);
       this.frm.get('title')?.setValue(postResponse.data.post.title);
       this.frm.get('city')?.setValue(postResponse.data.post.city);
       this.frm.get('locality')?.setValue(postResponse.data.post.locality);
@@ -62,7 +64,7 @@ export class EditComponent implements OnInit {
   }
 
   protected async update() {
-    let response = await this.postService.update(this.frm?.value, this.postUuid);
+    let response = await this.postService.update(this.frm?.value, this.slug);
     this.router.navigateByUrl('posts');
   }
 

@@ -15,18 +15,27 @@
         @for (post of postsPaginate.data; track $index) {
           <tr>
             <td>{{ post.created_at|date:"dd-MM-Y" }}</td>
-            <td>{{ post.type|postTypeEnum}}</td>
+            <!-- <td>{{ post.type|postTypeEnum}}</td> -->
+            <td>
+              <span class="badge rounded-pill" [class]="post.type|postTypeTag">    
+                {{ post.type|postTypeEnum }}
+              </span>
+            </td>
+
             <td>{{ post.title|truncate:20 }}</td>
-            <td><span class="status active">{{ post.is_approved }}</span></td>
+            <td><span class="badge rounded-pill" [class]="post.is_approved ? 'soft-green': 'soft-red'">{{ post.is_approved }}</span></td>
             <td class="d-flex justify-content-around">
-              <button class="btn btn-soft-green" [routerLink]="['/posts/', post.uuid]" routerLinkActive="router-link-active">
-                <span class="material-icons">visibility</span>
+              <button class="btn soft-green" [routerLink]="['/posts', post.slug]" routerLinkActive="router-link-active">
+                <!-- <span class="material-icons">visibility</span> -->
+                Ver
               </button>
-              <button class="btn btn-soft-blue" [routerLink]="['/posts/edit', post.uuid]" routerLinkActive="router-link-active">
-                <span class="material-icons">edit</span>
+              <button class="btn soft-blue" [routerLink]="['/',username, post.slug, 'edit-post']" routerLinkActive="router-link-active">
+                <!-- <span class="material-icons">edit</span> -->
+                Actualizar
               </button>
-              <button class="btn btn-soft-red">
-                <span class="material-icons">delete</span>
+              <button class="btn soft-red">
+                <!-- <span class="material-icons">delete</span> -->
+                Eliminar
               </button>
             </td>
           </tr>

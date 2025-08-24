@@ -1,28 +1,50 @@
 @if(authService.userLogin) {
-  <nav class="navbar navbar-expand-lg shadow-sm py-3">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">MyApp</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<nav class="navbar navbar-expand-lg shadow-sm py-3">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="">MyApp</a>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-link" routerLink="/posts">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item dropdown" [class.show]="isOpenPosts">
+          <a
+            class="nav-link dropdown-toggle"
+            id="postsDropdown"
+            role="button"
+            [attr.aria-expanded]="isOpenPosts"
+            (click)="togglePosts($event)"
+            (keydown.enter)="togglePosts($event)"
+            (keydown.space)="togglePosts($event)">
             Publicaciones
-          </li>
-          <li class="nav-link" [routerLink]="['/accounts', authService.userLogin.uuid]">
-            Mi cuenta
-          </li>
-        </ul>
-      </div>
+          </a>
 
-      <div class="d-flex gap-2">
-        <button class="btn soft-red" (click)="logout()">
-          <span class="material-icons">logout</span> Cerrar sesión
-        </button>
-      </div>
+          <ul class="dropdown-menu" [class.show]="isOpenPosts" aria-labelledby="postsDropdown" (click)="$event.stopPropagation()">
+            <li class="dropdown-item nav-link" routerLink="/posts">
+                Ver publicaciones
+              </li>
+            <li class="dropdown-item nav-link" [routerLink]="['/', authService.userLogin.username, 'posts']">
+              Mis publicaciones
+            </li>
+          </ul>
+        </li>
 
+        <li class="nav-link" [routerLink]="['', authService.userLogin.username]">
+          Mi cuenta
+        </li>
+      </ul>
     </div>
-  </nav>
+
+    <div class="d-flex gap-2">
+      <button class="btn soft-red" (click)="logout()">
+        <span class="material-icons">logout</span> 
+        Cerrar sesión
+      </button>
+    </div>
+  </div>
+</nav>
+
 }

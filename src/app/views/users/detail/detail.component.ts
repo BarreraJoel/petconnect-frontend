@@ -10,7 +10,6 @@ import { StorageService } from '../../../services/storage/storage.service';
 import { PostService } from '../../../services/posts/post.service';
 import { ListComponent } from '../../../components/posts/list/list.component';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
-import { TabComponent } from '../../../components/tab/tab.component';
 import { UserAccountSkeletonComponent } from '../../../components/skeleton/user-account-skeleton/user-account-skeleton.component';
 import { AuthService } from '../../../services/auth/auth.service';
 
@@ -18,7 +17,7 @@ import { AuthService } from '../../../services/auth/auth.service';
   selector: 'app-detail',
   standalone: true,
   imports: [
-    FormsModule, TabComponent,
+    FormsModule, 
     NavbarComponent, ListComponent, UserAccountSkeletonComponent,
     AvatarModule, ButtonModule,
     RouterLink
@@ -29,7 +28,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 export class DetailComponent implements OnInit {
 
   protected user: User | null = null;
-  protected userUuid: string;
+  protected username: string;
   protected postsPaginate: any | null = null;
 
   constructor(
@@ -40,20 +39,20 @@ export class DetailComponent implements OnInit {
     private storageService: StorageService,
     private postService: PostService,
   ) {
-    let uuid = this.actRoute.snapshot.paramMap.get('uuid');
-    this.userUuid = <string>uuid;
+    let username = this.actRoute.snapshot.paramMap.get('username');
+    this.username = <string>username;    
   }
 
   async ngOnInit() {
     if (!this.authService.userLogin) {
       await this.authService.loadUser();
     }
-    await this.loadPosts();
     await this.loadUser();
+    await this.loadPosts();
   }
 
   private async loadUser() {
-    let response = await this.userService.get(this.userUuid);
+    let response = await this.userService.get(this.username);
     if (response) {
       let userResponse = response as ApiResponse<{
         user: User
@@ -66,7 +65,7 @@ export class DetailComponent implements OnInit {
   }
 
   private async loadPosts() {
-    let responsePosts = await this.postService.getByUserId(this.userUuid);
+    let responsePosts = await this.postService.getByUserId(this.user?.uuid ?? '');
     let postsResponse = responsePosts as ApiResponse<{
       posts: any
     }>;

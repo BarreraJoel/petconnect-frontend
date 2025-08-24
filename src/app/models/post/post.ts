@@ -5,11 +5,12 @@ export interface Post {
     type: PostTypeEnum,
     title: string,
     city: string,
+    slug: string,
     locality: string,
     description: string,
     images_url: string[] | null,
     is_approved: boolean,
-    user_id: string,
+    user_uuid: string,
     created_at: Date
     updated_at: Date
 }

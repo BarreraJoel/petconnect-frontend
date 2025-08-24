@@ -10,12 +10,7 @@
       <form [formGroup]="frm" (ngSubmit)="login()">
         <div class="mb-3">
           <label for="text" class="form-label">Correo electrónico *</label>
-          <input 
-            name="email" 
-            type="text" 
-            class="form-control" 
-            placeholder="Enter Email / Phone No" 
-            formControlName="email">
+          <input name="email" type="text" class="form-control" placeholder="Ingrese el correo electrónico" formControlName="email">
           @if(verifyControlErrors('email')){
             <alert [message]="getErrorMessage('email')" />
           }
@@ -23,25 +18,21 @@
 
         <div class="mb-4">
           <label for="text" class="form-label">Contraseña *</label>
-          <input  
-            name="password" 
-            type="password" 
-            class="form-control" 
-            placeholder="Passcode" 
-            formControlName="password">
+          <input name="password" type="password" class="form-control" placeholder="Ingrese la contraseña" formControlName="password">
           @if(verifyControlErrors('password')){
             <alert [message]="getErrorMessage('password')" />
           }
         </div>
 
-        <button type="submit" class="btn btn-success w-100 mb-3" [disabled]="frm.invalid">
+        <button type="submit" class="btn soft-green w-100 mb-3" [disabled]="frm.invalid">
           Ingresar
+          <span class="material-icons text-center">arrow_forward</span> 
         </button>
       </form>
 
       <p class="small text-center mt-4">
         Todavía no tenes una cuenta? 
-        <a class="fw-bold text-decoration-none" routerLink="/auth/sign-up">Registrate</a>
+        <span class="fw-bold text-primary" id="sign-up-link"  routerLink="/auth/sign-up">Registrate</span>
       </p>
     </div>
   </div>

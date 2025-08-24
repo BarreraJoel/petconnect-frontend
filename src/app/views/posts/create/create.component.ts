@@ -49,7 +49,7 @@ export class CreateComponent implements OnInit {
       'locality': ['', Validators.required],
       'description': ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
       'type': [PostTypeEnum.ADOPT, Validators.required],
-      'user_id': ['', Validators.required],
+      'user_uuid': ['', Validators.required],
       'images': [null],
     });
 
@@ -92,7 +92,7 @@ export class CreateComponent implements OnInit {
 
   protected async publish() {
     if (this.authService.userLogin) {      
-      this.frm.get('user_id')?.setValue(this.authService.userLogin.uuid);
+      this.frm.get('user_uuid')?.setValue(this.authService.userLogin.uuid);
 
       const formData = new FormData();
       formData.append('title', this.frm.get('title')?.value);
@@ -100,7 +100,7 @@ export class CreateComponent implements OnInit {
       formData.append('locality', this.frm.get('locality')?.value);
       formData.append('description', this.frm.get('description')?.value);
       formData.append('type', this.frm.get('type')?.value);
-      formData.append('user_id', this.frm.get('user_id')?.value);
+      formData.append('user_uuid', this.frm.get('user_uuid')?.value);
       this.files.forEach((file, index) => {
         formData.append(`images[]`, file);
       });

@@ -20,8 +20,6 @@ import { NavbarAuthComponent } from '../../../components/navbar/navbar-auth/navb
 })
 export class LoginComponent {
 
-  protected email: string = "juan@mail.com";
-  protected password: string = "12345678";
   protected remember = false;
   protected frm: FormGroup = new FormGroup({});
 
@@ -31,7 +29,7 @@ export class LoginComponent {
 
   private createForm() {
     this.frm = this.fb.group({
-      'email': ['juan@mail.com', [Validators.required, Validators.email]],
+      'email': ['leuschke.john@example.com', [Validators.required, Validators.email]],
       'password': ['12345678', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     });
   }

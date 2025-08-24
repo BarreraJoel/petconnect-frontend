@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostListTableComponent } from './post-list-table.component';
+import { PostListAccountComponent } from './post-list-account.component';
 
-describe('PostListTableComponent', () => {
-  let component: PostListTableComponent;
-  let fixture: ComponentFixture<PostListTableComponent>;
+describe('PostListAccountComponent', () => {
+  let component: PostListAccountComponent;
+  let fixture: ComponentFixture<PostListAccountComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PostListTableComponent]
+      imports: [PostListAccountComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PostListTableComponent);
+    fixture = TestBed.createComponent(PostListAccountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -31,8 +31,8 @@ export class PostService {
     return this.apiService.get(`${environment.backend.apiV1Host}/posts`, environment.backend.optionsApi.cookies);
   }
 
-  public async get(uuid: string) {
-    return this.apiService.get(`${environment.backend.apiV1Host}/posts/${uuid}`, environment.backend.optionsApi.cookies);
+  public async get(slug: string) {
+    return this.apiService.get(`${environment.backend.apiV1Host}/posts/${slug}`, environment.backend.optionsApi.cookies);
   }
 
   public async getByUserId(uuid: string) {

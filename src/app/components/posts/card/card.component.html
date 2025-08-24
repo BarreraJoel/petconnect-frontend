@@ -18,11 +18,11 @@
               <img [src]="getImagePath(userPost.image_url)" alt="avatar">
             }
             @else {
-              <span>{{userPost.first_name[0]}}{{userPost.last_name[0]}}</span>
+              <span>{{userPost.username}}</span>
             }
           </div>
           <div>
-            <div class="fw-semibold">{{userPost.first_name}} {{userPost.last_name}}</div>
+            <div class="fw-semibold">{{userPost.username}}</div>
             <small class="text-muted">{{post.created_at|timeAgo}}</small>
           </div>
         </div>
@@ -31,7 +31,7 @@
         <h5 class="card-title fw-bold">{{post.title|truncate:15|uppercase}}</h5>
         <p class="card-text text-muted">{{post.description|truncate:30}}</p>
 
-        <button class="btn soft-teal" (click)="detail(post.uuid)">
+        <button class="btn soft-teal" [routerLink]="['/posts', post.slug]">
           Leer más <span class="material-icons">keyboard_arrow_right</span> 
         </button>
       </div>

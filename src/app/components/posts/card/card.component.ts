@@ -1,6 +1,6 @@
 import { UpperCasePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { AvatarModule } from 'primeng/avatar';
@@ -19,6 +19,7 @@ import { SkeletonComponent } from '../../skeleton/skeleton.component';
   selector: 'post-card',
   standalone: true,
   imports: [
+    RouterLink,
     SkeletonComponent,
     UpperCasePipe, TruncatePipe, PostTypeEnumPipe, PostTypeTagPipe, TimeAgoPipe,
     ButtonModule, CardModule, AvatarModule, TagModule,
@@ -40,7 +41,7 @@ export class CardComponent implements OnInit {
   async ngOnInit() {
     await this.userService.loadUsers();
     if (this.userService.users) {
-      this.findUser(this.userService.users, this.post.user_id);
+      this.findUser(this.userService.users, this.post.user_uuid);
     }
   }
 

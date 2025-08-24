@@ -6,7 +6,7 @@
          <div class="cover"></div>
 
     @if(user.uuid == authService.userLogin.uuid) {
-        <button class="btn top-right-btn soft-orange" routerLink="edit">
+        <button class="btn top-right-btn soft-orange" routerLink="edit-profile">
             <span class="material-icons nunito-bold">edit</span> Editar perfil
         </button>
     }
@@ -17,12 +17,12 @@
             <img [src]="getImagePath(user.image_url)" alt="profile">
         }
         @else {
-            <span>{{user.first_name[0]}}{{user.last_name[0]}}</span>
+            <span>{{user.username}}</span>
         }
     </div>
     
     <div class="info">
-        <h2 class="nunito-bold">{{user.first_name}} {{user.last_name}}</h2>
+        <h2 class="nunito-bold">{{user.username}}</h2>
         <div class="social-pills nunito-bold">
             @if(user.facebook_url) {
                 <span class="pill soft-navy">
@@ -62,13 +62,9 @@
     </div>
     
     <div class="col-md-12">
-        <tab />
-        <!-- <div class="col-md-11">
-            <router-outlet />
-        </div> -->
         <div>
             @if(postsPaginate) {
-                <list-posts [postsPaginate]="postsPaginate" [isAuthenticated]="authService.userLogin.uuid == userUuid"/>
+                <list-posts [postsPaginate]="postsPaginate" [isAuthenticated]="authService.userLogin.username == username"/>
             }
             @else {
                 <h6>Todavía no realizo publicaciones</h6>

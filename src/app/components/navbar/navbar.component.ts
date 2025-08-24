@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
 import { Ripple } from 'primeng/ripple';
@@ -15,11 +15,13 @@ import { AuthService } from '../../services/auth/auth.service';
   imports: [
     AvatarModule, Ripple, InputTextModule, BadgeModule, ButtonModule, InputIcon, IconField,
     RouterLink
-],
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+
+  protected isOpenPosts = false;
 
   constructor(private router: Router, protected authService: AuthService) { }
 
@@ -45,6 +47,16 @@ export class NavbarComponent {
     await this.authService.logout();
     this.authService.userLogin = null;
     this.redirect('auth/sign-in');
+  }
+
+  protected togglePosts(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isOpenPosts = !this.isOpenPosts;
+  }
+
+  protected closePosts() {
+    this.isOpenPosts = false;
   }
 
 }

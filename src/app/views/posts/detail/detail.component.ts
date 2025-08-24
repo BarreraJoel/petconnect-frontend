@@ -31,7 +31,7 @@ export class DetailComponent implements OnInit {
 
   protected userPost: User | null = null;
   protected images: any[] | null = null;
-  protected postUuid: string = "";
+  protected slug: string = "";
   protected post: Post | null = null;
   protected isLoading: boolean = true;
 
@@ -42,12 +42,12 @@ export class DetailComponent implements OnInit {
     private actRoute: ActivatedRoute,
     private storageService: StorageService,
   ) {
-    let uuid = this.actRoute.snapshot.paramMap.get('uuid');
-    this.postUuid = <string>uuid;
+    let slug = this.actRoute.snapshot.paramMap.get('slug');
+    this.slug = <string>slug;
   }
 
   async ngOnInit() {
-    let postResponse = await this.postService.get(this.postUuid);
+    let postResponse = await this.postService.get(this.slug);
 
     let response = postResponse as ApiResponse<{
       post: Post
@@ -57,7 +57,7 @@ export class DetailComponent implements OnInit {
       if (response.data) {
         this.post = response.data.post;
 
-        let userResponse = await this.userService.get(this.post.user_id);
+        let userResponse = await this.userService.get(this.post.user_uuid);
 
         if (userResponse) {
           let responseAux = userResponse as ApiResponse<{

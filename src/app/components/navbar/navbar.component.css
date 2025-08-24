@@ -9,9 +9,26 @@
   font-weight: 500;
   color: #555; /* gris medio */
   transition: color 0.2s;
+  cursor: pointer;
 }
 
 .nav-link:hover,
 .nav-link.active {
   color: #333; /* gris oscuro al hover */
+}
+
+.dropdown-menu {
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown-item {
+  font-weight: 500;
+  color: #555;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f4ee; /* crema claro al hover */
+  color: #333;
 }
